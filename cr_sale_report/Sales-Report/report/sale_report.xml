@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report auto="False" id="report_sale_details" menu="False" model="sale.order" name="sale.details" rml="cr_sale_report/report/sale_report.rml" string="Sales Details"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- 
+        ====    BILL OF MATERIAL HISTORY LINE    ====
+        -->
+        <record id="mrp_bom_history_details_list_view" model="ir.ui.view">
+            <field name="name">BoM History Details List</field>
+            <field name="model">bom.history.line</field>
+            <field name="arch" type="xml">
+                <tree string="BoM History Details">
+                    <field name="product_id" />
+                    <field name="product_qty" />
+                    <field name="product_uom" />
+                    <field name="date_start"/>
+                    <field name="date_stop"/>
+                </tree>
+            </field>
+        </record>
+        <record id="mrp_bom_history_details_form_view" model="ir.ui.view">
+            <field name="name">BoM History Details Form</field>
+            <field name="model">bom.history.line</field>
+            <field name="arch" type="xml">
+                <form string="BoM History Details" version="7.0">
+                    <group>
+                        <field name="product_id" on_change="onchange_product_id(product_id, name, context)"
+                            context="{'default_supply_method':'produce'}" class="oe_inline" />
+                        <label for="product_qty" string="Quantity" />
+                        <div>
+                            <field name="product_qty" class="oe_inline" />
+                            <field name="product_uom" class="oe_inline"
+                                on_change="onchange_uom(product_id, product_uom)" groups="product.group_uom" />
+                        </div>
+                    </group>
+                    <group>
+                        <field name="name" groups="base.group_no_one"/>
+                        <field name="code" string="Reference"/>
+                        <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!--
+        ====    BILL OF MATERIAL HISTORY    ====
+        -->
+        <record id="mrp_bom_history_list_view" model="ir.ui.view">
+            <field name="name">BoM History List</field>
+            <field name="model">bom.history</field>
+            <field name="arch" type="xml">
+                <tree string="BoM History">
+                    <field name="date" />
+                    <field name="name" />
+                    <field name="create_uid" />
+                    <field name="create_date" />
+                </tree>
+            </field>
+        </record>
+        <record id="mrp_bom_history_form_view" model="ir.ui.view">
+            <field name="name">BoM History List</field>
+            <field name="model">bom.history</field>
+            <field name="arch" type="xml">
+                <form string="BoM History" version="7.0">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>BoM History <field name="name" class="oe_inline"/></h1>
+                        </div>
+                        <group>
+                            <field name="date" />
+                            <field name="create_uid" />
+                            <field name="create_date" />
+                        </group>
+                        <notebook>
+                            <page string="Components">
+                                <group>
+                                    <field name="history_ids" nolabel="1" readonly="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        
+        <!--
+        ====    BILL OF MATERIAL HISTORY    ====
+        -->
+        <record id="mrp_bom_form_view_history" model="ir.ui.view">
+            <field name="name">View BoM History on BoM</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+            <field name="arch" type="xml">
+                <page string="Components" position="after">
+                    <page string="History">
+                        <field name="history_ids" readonly="0" />
+                    </page>
+                </page>
+                
+                <field name="bom_lines" position="after">
+                    <button string="Create new component list" name="%(mrp_bom_history.action_view_save_bom_history_form)d" type="action" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>

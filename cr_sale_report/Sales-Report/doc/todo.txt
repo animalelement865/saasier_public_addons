@@ -1,0 +1,5 @@
+
+1) Code Clean up
+2) Pecentage calculation should be based on the total sales of the period???
+3) Net Summary needed?
+4) 

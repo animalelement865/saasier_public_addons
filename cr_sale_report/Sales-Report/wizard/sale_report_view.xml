@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="view_sale_details" model="ir.ui.view">
+			<field name="name">Sale Details</field>
+			<field name="model">sale.details</field>
+			<field name="arch" type="xml">
+				<form string="Report Options" version="7.0">
+					<group col="4">
+						<field name="category_id"/>
+						<newline/>
+						<field name="date_from"/>
+						<field name="date_to"/>
+					</group>
+					<footer>
+						<button name="print_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+						
+                    or 
+                    
+						<button string="Cancel" class="oe_link" special="cancel" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="action_sale_details" model="ir.actions.act_window">
+			<field name="name">Sales details by product</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">sale.details</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+			<field name="view_id" ref="view_sale_details"/>
+		</record>
+
+		<menuitem name="Reporting" id="menu_sale_report" parent="base.menu_base_partner"  groups="base.group_sale_salesman_all_leads" sequence="20"/>
+		<menuitem name="Sales by Product" parent="menu_sale_report" action="action_sale_details"
+			id="menu_sale_details" />
+
+	</data>
+</openerp>
+

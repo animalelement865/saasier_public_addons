@@ -1,0 +1,47 @@
+<openerp>
+    <data>
+        <record id="view_save_bom_history_form" model="ir.ui.view">
+            <field name="name">Save BoM History</field>
+            <field name="model">save.bom.history</field>
+            <field name="arch" type="xml">
+                <form string="Save BoM as History" version="7.0">
+                    <group >
+                        <p colspan="2" class="oe_grey">
+                            Your current component list (BoM) will be saved as history.
+                            Please insert history information.
+                        </p>
+                        <field name="name"/>
+                        <field name="cut_off_date"/>
+                    </group>
+                    <group string="Please insert new bills of material..">
+                        <field name="new_bom_ids" widget="one2many_list" nolabel="1">
+                            <tree string="New Bill of Material" editable="bottom">
+                                <field name="product_id" on_change="onchange_product_id(product_id, name)"/>
+                                <field name="product_qty" />
+                                <field name="product_uom" />
+                                <field name="date_start" />
+                                <field name="date_stop" />
+                                <field name="name" invisible="1" />
+                            </tree>
+                        </field>
+                    </group>
+                    <footer>
+                        <button string="Save" name="save_history" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_view_save_bom_history_form" model="ir.actions.act_window">
+            <field name="name">Create New Component List</field>
+            <field name="res_model">save.bom.history</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_save_bom_history_form"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</openerp>

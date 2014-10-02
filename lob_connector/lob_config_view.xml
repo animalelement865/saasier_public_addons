@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+  
+    <record id="view_lob_config_exam" model="ir.ui.view">
+      <field name="name">lob.config</field>
+      <field name="model">lob.config</field>
+      <field name="arch" type="xml">
+        <tree string="Lob.com">
+          <field name="name" />
+          <field name="api" />
+        </tree>
+      </field>
+    </record>
+    
+    <record id="lob_config_form" model="ir.ui.view">
+      <field name="name">lob_config_form</field>
+      <field name="model">lob.config</field>
+      <field name="arch" type="xml">
+        <form string="Lob.com" version="7.0">
+          <sheet>
+            <group>
+              <field name="name" required="1" />
+              <field name="api" required="1" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    
+    <record id="action_lob_config_form" model="ir.actions.act_window">
+      <field name="name">Lob.com</field>
+      <field name="res_model">lob.config</field>
+      <field name="view_type">form</field>
+      <field name="view_id" ref="view_lob_config_exam" />
+    </record>
+    
+    <menuitem action="action_lob_config_form" id="menu_action_lob_config_form" parent="account.menu_configuration_misc" />
+    
+  </data>
+</openerp>

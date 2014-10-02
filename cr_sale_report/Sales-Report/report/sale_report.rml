@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<document filename="test.pdf">
+  <template pageSize="(595.0,842.0)" title="Test" author="Martin Simon" allowSplitting="20">
+    <pageTemplate id="first">
+      <frame id="first" x1="57.0" y1="57.0" width="481" height="728"/>
+    </pageTemplate>
+  </template>
+  <stylesheet>
+    <blockTableStyle id="Standard_Outline">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table1">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table4">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table2">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#b3b3b3" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="4,0" stop="4,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="4,-1" stop="4,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table3">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="3,-1" stop="3,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#b3b3b3" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#b3b3b3" start="4,0" stop="4,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#b3b3b3" start="4,0" stop="4,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#b3b3b3" start="4,-1" stop="4,-1"/>
+    </blockTableStyle>
+    <blockTableStyle id="Table5">
+      <blockAlignment value="LEFT"/>
+      <blockValign value="TOP"/>
+      <lineStyle kind="LINEBEFORE" colorName="#999999" start="0,0" stop="0,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#999999" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#999999" start="0,-1" stop="0,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#999999" start="1,0" stop="1,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#999999" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#999999" start="1,-1" stop="1,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#999999" start="2,0" stop="2,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#999999" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#999999" start="2,-1" stop="2,-1"/>
+      <lineStyle kind="LINEBEFORE" colorName="#999999" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEAFTER" colorName="#999999" start="3,0" stop="3,-1"/>
+      <lineStyle kind="LINEABOVE" colorName="#999999" start="3,0" stop="3,0"/>
+      <lineStyle kind="LINEBELOW" colorName="#999999" start="3,-1" stop="3,-1"/>
+    </blockTableStyle>
+    <initialize>
+      <paraStyle name="all" alignment="justify"/>
+    </initialize>
+    <paraStyle name="P1" fontName="Helvetica-Bold" alignment="CENTER"/>
+    <paraStyle name="P2" fontName="Helvetica"/>
+    <paraStyle name="P3" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="LEFT"/>
+    <paraStyle name="P4" fontName="Helvetica" fontSize="8.0" leading="10" alignment="RIGHT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="P5" fontName="Helvetica" fontSize="8.0" leading="10" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="P6" fontName="Helvetica" fontSize="6.0" leading="8" alignment="LEFT" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="P7" fontName="Helvetica-Bold" fontSize="9.0" leading="11"/>
+    <paraStyle name="P8" fontName="Helvetica-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+    <paraStyle name="P9" fontName="Helvetica" fontSize="9.0" leading="11" alignment="CENTER"/>
+    <paraStyle name="Standard" fontName="Helvetica"/>
+    <paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+    <paraStyle name="Text body" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="List" fontName="Helvetica" spaceBefore="0.0" spaceAfter="6.0"/>
+    <paraStyle name="Caption" fontName="Helvetica" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+    <paraStyle name="Index" fontName="Helvetica"/>
+    <paraStyle name="Table Contents" fontName="Helvetica"/>
+    <paraStyle name="Preformatted Text" fontName="Helvetica" fontSize="10.0" leading="13" spaceBefore="0.0" spaceAfter="0.0"/>
+    <paraStyle name="Table Heading" fontName="Helvetica" alignment="CENTER"/>
+    <images/>
+  </stylesheet>
+  <story>
+    <blockTable colWidths="482.0" style="Table1">
+      <tr>
+        <td>
+          <para style="P1">Sales by Product Category</para>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <para style="P9"><font face="Helvetica">From:</font> [[ formatLang(data['date_from'],date=True) ]] <font face="Helvetica">To:</font> [[ formatLang(data['date_to'],date=True) ]][[ calculate() ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="P2">
+      <font color="white"> </font>
+    </para>
+    <para style="P3">[[ repeatIn(get_category_ids(data['category_id'][0]), 'category_id')]]</para>
+    <blockTable colWidths="482.0" style="Table4">
+      <tr>
+        <td>
+          <para style="P3">Category : [[ get_category_name(category_id) ]]</para>
+        </td>
+      </tr>
+    </blockTable>
+    <blockTable colWidths="229.0,44.0,65.0,72.0,72.0" style="Table2">
+      <tr>
+        <td>
+          <para style="P7">Product</para>
+        </td>
+        <td>
+          <para style="P8">Qty</para>
+        </td>
+        <td>
+          <para style="P8">Amount</para>
+        </td>
+        <td>
+          <para style="P8">Average</para>
+        </td>
+        <td>
+          <para style="P8">Percentage</para>
+        </td>
+      </tr>
+    </blockTable>
+    <section>
+      <para style="P6">
+        <font face="Helvetica">[[ repeatIn(get_product_details(category_id),'line') ]]</font>
+      </para>
+      <blockTable colWidths="229.0,44.0,65.0,72.0,72.0" style="Table3">
+        <tr>
+          <td>
+            <para style="P5">[[ line['product_name'] ]]</para>
+          </td>
+          <td>
+            <para style="P4">[[ formatLang(line['qty']) ]]</para>
+          </td>
+          <td>
+            <para style="P4">[[ formatLang(line['amount']) ]]</para>
+          </td>
+          <td>
+            <para style="P4">[[ formatLang(line['average']) ]]</para>
+          </td>
+          <td>
+            <para style="P4">[[ formatLang(line['percentage']) ]]</para>
+          </td>
+        </tr>
+      </blockTable>
+    </section>
+    <blockTable colWidths="229.0,44.0,65.0,144.0" style="Table5">
+      <tr>
+        <td>
+          <para style="P7">Total</para>
+        </td>
+        <td>
+          <para style="P8">[[ formatLang(get_category_total(category_id)['total_qty']) ]]</para>
+        </td>
+        <td>
+          <para style="P8">[[ formatLang(get_category_total(category_id)['total_amt']) ]]</para>
+        </td>
+        <td>
+          <para style="P8">
+            <font color="white"> </font>
+          </para>
+        </td>
+      </tr>
+    </blockTable>
+    <para style="Standard">
+      <font color="white"> </font>
+    </para>
+  </story>
+</document>
+

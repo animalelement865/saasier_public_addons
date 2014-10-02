@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_evernote_form">
+            <field name="name">view.evernote.form</field>
+            <field name="model">oe.evernote</field>
+            <field name="arch" type="xml">
+                <form string="Evernote">
+                    <group col="4">
+                        <field name="link" widget='url'/>
+                        <field name="date"/>
+                        <field name="desc"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_evernote_tree">
+            <field name="name">view.evernote.tree</field>
+            <field name="model">oe.evernote</field>
+            <field name="arch" type="xml">
+                <tree string="Evernote" >
+                    <field name="link" widget='url' />
+                    <field name="date"/>
+                    <field name="desc"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_po_evernote_form">
+            <field name="name">view.purchase.order.evernote.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_crm_lead_evernote_form">
+            <field name="name">view.crm.lead.evernote.form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_crm_opp_evernote_form">
+            <field name="name">view.crm.opp.evernote.form</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_partner_evernote_form">
+            <field name="name">view.partner.evernote.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_invoice_evernote_form">
+            <field name="name">view.account.invocie.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_project_evernote_form">
+            <field name="name">view.project.project.form</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_task_evernote_form">
+            <field name="name">view.project.task.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_bank_statement_evernote_form">
+            <field name="name">view.bank.statement.form</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_acc_move_evernote_form">
+            <field name="name">view.acc.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_cus_payment_evernote_form">
+            <field name="name">view.cus.payment.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_supp_payment_evernote_form">
+            <field name="name">view.supp.payment.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_stock_picking_in_evernote_form">
+            <field name="name">view.stock.picking.in.form</field>
+            <field name="model">stock.picking.in</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_stock_picking_out_evernote_form">
+            <field name="name">view.stock.picking.out.form</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_stock_inventory_evernote_form">
+            <field name="name">view.stock.inventory.form</field>
+            <field name="model">stock.inventory</field>
+            <field name="inherit_id" ref="stock.view_inventory_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_mo_evernote_form">
+            <field name="name">view.mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_product_evernote_form">
+            <field name="name">view.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_employee_evernote_form">
+            <field name="name">view.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_employee_timesheet_evernote_form">
+            <field name="name">view.employee.timesheet.form</field>
+            <field name="model">hr_timesheet_sheet.sheet</field>
+            <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Evernote">
+                        <field name="evernote_ids"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    </data>
+</openerp>

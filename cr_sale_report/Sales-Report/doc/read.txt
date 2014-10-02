@@ -1,0 +1,8 @@
+
+
+
+	1) IMPORTANT : 
+		- Category Configuration
+				The category type  ( NORMAL / VIEW ) should be configured properly.
+				(Menu : Sales / Configuration / Products / Product Categories)
+
