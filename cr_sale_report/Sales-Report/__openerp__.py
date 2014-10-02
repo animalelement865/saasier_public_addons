@@ -29,7 +29,7 @@
          Sales reports
         - 
 """,
-    'author': 'Chris Jones',
+    'author': 'SaaSier',
     'website': 'http://www.saasier.com',
     'summary': '',
     'depends': [

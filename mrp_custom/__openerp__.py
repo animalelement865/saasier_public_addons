@@ -23,8 +23,8 @@
 {
     'name': 'MRP Custom',
     'version': '1.1',
-    'author': '4devnet.com',
-    'website': 'http://www.4devnet.com',
+    'author': 'SaaSier',
+    'website': 'http://www.saasier.com',
     'category': 'Manufacturing',
    # 'sequence': 18,
     'summary': 'Customized in Routings',

@@ -29,8 +29,8 @@
          Sales reports
         - 
 """,
-    'author': 'AryaUR123',
-    'website': 'fablousinweb@gmail.com',
+    'author': 'SaaSier',
+    'website': 'www.saasier.com',
     'summary': '',
     'depends': [
             'sale',

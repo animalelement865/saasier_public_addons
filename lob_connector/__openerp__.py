@@ -7,8 +7,8 @@
     'description': """
             Openerp - Lob.com Integration
     """,
-    'author': 'Zedes',
-    'website': 'http://www.zedestech.com',
+    'author': 'SaaSier',
+    'website': 'http://www.saasier.com',
     'images': [],
     'depends': ['account','sale'],
     'data': [

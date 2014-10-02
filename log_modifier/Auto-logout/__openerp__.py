@@ -7,7 +7,7 @@
 'installable':True,
 'category':'General',
 'description':'Last Login Details',
-'website':'',
+'website':'http://www.saasier.com',
 'demo':[],
 'qweb': [
         'static/src/xml/base.xml'],

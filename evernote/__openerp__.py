@@ -22,8 +22,8 @@
 {
     'name': 'EverNote',
     'description': """Added Evernote Tab""",
-    'author': 'Acespritech Solutions Pvt. Ltd.',
-    'website': 'http://www.acespritech.com',
+    'author': 'SaaSier',
+    'website': 'http://www.saasier.com',
     'depends': [
         'base', 'sale', 'purchase',
         'crm', 'account_accountant',
