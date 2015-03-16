@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="gmp_compliance_audits_action" model="ir.actions.act_window">
+			<field name="name">Audits</field>
+			<field name="res_model">mgmtsystem.audit</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click Create to a new Audit Record.</p>
+			</field>
+		</record>
+
+		<record id="gmp_compliance_reviews_action" model="ir.actions.act_window">
+			<field name="name">Reviews</field>
+			<field name="res_model">mgmtsystem.review</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click Create to a new Reviews Record.</p>
+			</field>
+		</record>
+
+		<record id="product_search_gmp_view" model="ir.ui.view">
+			<field name="name">GMP Product Search</field>
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_search_form_view" />
+			<field name="arch" type="xml">
+				<filter name="consumable" position="after">
+					<filter string="GMP Apply" name="gmp" icon="terp-accessories-archiver" domain="[('gmp_apply','=','y')]" />
+				</filter>
+			</field>
+		</record>
+		<record id="gmp_compliance_products_action" model="ir.actions.act_window">
+			<field name="name">Products/Raw Materials</field>
+			<field name="res_model">product.product</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context">{'search_default_gmp': 1,'default_gmp_apply':'y'}</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click Create to a new Product Record.</p>
+			</field>
+		</record>
+
+		<record id="gmp_compliance_claims_action" model="ir.actions.act_window">
+			<field name="name">Claims/Noncorformities</field>
+			<field name="res_model">mgmtsystem.nonconformity</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click Create to a new Claim/Nonconformities
+					Record.
+				</p>
+			</field>
+		</record>
+
+		<record id="gmp_compliance_coa_action" model="ir.actions.act_window">
+			<field name="name">COAs</field>
+			<field name="res_model">gmp.coa</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+			</field>
+		</record>
+
+		<record id="gmp_maintenance_orders_action" model="ir.actions.act_window">
+			<field name="name">Maintenance Orders</field>
+			<field name="res_model">mro.order</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">Click Create to add a new Maintenance Order
+					record.
+				</p>
+			</field>
+		</record>
+
+		<record id="gmp_manuals_manuals_action" model="ir.actions.act_window">
+			<field name="name">Manuals</field>
+			<field name="res_model">document.page</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="document_page.view_wiki_tree" />
+			<field name="search_view_id" ref="document_page.view_wiki_filter" />
+			<field name="help">Manuals of your management systems.
+			</field>
+			<field name="domain" eval="[('parent_id','=','Manuals')]" />
+		</record>
+
+		<record id="gmp_manuals_sop_action" model="ir.actions.act_window">
+			<field name="name">SOPs</field>
+			<field name="res_model">document.page</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="document_page.view_wiki_tree" />
+			<field name="search_view_id" ref="document_page.view_wiki_filter" />
+			<field name="help">Manuals of your management systems.
+			</field>
+			<field name="domain" eval="[('parent_id','=','Procedure')]" />
+		</record>
+
+		<record id="mgmtsystem_audit_view_mgmtsystem_audit_tree" model="ir.ui.view">
+			<field name="model">mgmtsystem.audit</field>
+			<field name="inherit_id" ref="mgmtsystem_audit.view_mgmtsystem_audit_tree" />
+			<field name="name">view.mgmtsystem.audit.inherit.tree</field>
+			<field name="arch" type="xml">
+				<field name="state" position="attributes">
+					<attribute name="invisible">0</attribute>
+				</field>
+			</field>
+		</record>
+		<record id="mgmtsystem_audit_view_mgmtsystem_audit_form" model="ir.ui.view">
+			<field name="model">mgmtsystem.audit</field>
+			<field name="inherit_id" ref="mgmtsystem_audit.view_mgmtsystem_audit_form" />
+			<field name="name">view.mgmtsystem.audit.inherit.form</field>
+			<field name="arch" type="xml">
+				<field name="auditor_user_ids" position="replace">
+					<separator string="Auditors (Partner)" />
+					<field name="auditor_partner_ids" nolabel="1"
+						attrs="{'readonly':[('state','=','done')]}" domain="[('supplier','=',True)]" />
+					<separator string="Auditors (User)" />
+					<field name="auditor_user_ids" nolabel="1"
+						attrs="{'readonly':[('state','=','done')]}" />
+				</field>
+				<field name="auditee_user_ids" position="replace">
+					<separator string="Auditees (Partner)" />
+					<field name="auditee_partner_ids" nolabel="1"
+						attrs="{'readonly':[('state','=','done')]}" domain="[('supplier','=',True)]" />
+					<separator string="Auditees (User)" />
+					<field name="auditee_user_ids" nolabel="1"
+						attrs="{'readonly':[('state','=','done')]}" />
+				</field>
+
+				<notebook position="inside">
+					<page string="Related SOPs">
+						<group>
+							<field name="sop_ids" colspan="2" nolabel="1" />
+						</group>
+					</page>
+				</notebook>
+				<field name="reference" position="after">
+					<field name="res_partner_id" />
+				</field>
+				<field name="user_id" position="replace">
+					<field name="user_id" string="Audit Manager" />
+					<field name="prev_audit_id" readonly="1"
+						attrs="{'invisible':[('prev_audit_id','=',False)]}" />
+				</field>
+				<!-- <button name="button_close" position="attributes"> -->
+				<!-- <attribute name="states">pass,fail</attribute> -->
+				<!-- </button> -->
+				<button name="button_close" position="replace">
+					<button name="button_pass" string="Pass" states="open" type="object"
+						icon="gtk-yes" confirm="Are you sure?" />
+					<button name="button_fail" string="Fail" states="open" type="object"
+						icon="gtk-no" confirm="Are you sure?" />
+					<button name="button_open" string="Re-open" states="pass,fail"
+						type="object" icon="gtk-redo" />
+					<!-- <button name="button_close" string="Close" states="pass,fail" type="object" 
+						icon="gtk-jump-to" confirm="Are you sure?\nThis action is not reversable"/> -->
+				</button>
+			</field>
+		</record>
+
+		<record id="gmp_product_specs_form_view" model="ir.ui.view">
+			<field name="name">View Product Specs Form</field>
+			<field name="model">gmp.product_specs</field>
+			<field name="view_type">form</field>
+			<field name="arch" type="xml">
+				<form string="GMP Specs">
+					<group colspan="2" col="8">
+						<group colspan="2" col="1">
+							<!-- <label string="Parameter" /> -->
+							<field name="name" nolabel="1" readonly="1" />
+						</group>
+						<group colspan="2" col="1">
+							<!-- <label string="Indicator" /> -->
+							<field name="indicator" nolabel="1" readonly="1" />
+						</group>
+						<group colspan="2" col="1">
+							<!-- <label string="Value" /> -->
+							<field name="value" nolabel="1" readonly="1" />
+						</group>
+						<group colspan="2" col="1">
+							<!-- <label string="Unit" /> -->
+							<field name="unit" nolabel="1" readonly="1" />
+						</group>
+					</group>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="gmp_compliance_coa_tree_view" model="ir.ui.view">
+			<field name="name">gmp.compliance.coa.tree.view</field>
+			<field name="model">gmp.coa</field>
+			<field name="view_type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="COAs"
+					colors="black:state=='approved'; grey:state=='rejected'; blue:state=='draft'; green:state=='retest'">
+					<field name="partner_id" />
+					<field name="product_id" />
+					<field name="stock_production_lot_id" />
+					<field name="date" />
+					<field name="create_uid" />
+					<field name="state" />
+				</tree>
+			</field>
+		</record>
+
+
+		<record id="gmp_compliance_coa_form_view" model="ir.ui.view">
+			<field name="name">gmp.compliance.coa.form.view</field>
+			<field name="model">gmp.coa</field>
+			<field name="view_type">form</field>
+			<field name="arch" type="xml">
+				<form string="COAs" version="7.0">
+					<header>
+						<button string="Process COA" name="process_coa" type="object"
+							states="draft,retest" />
+						<button string="Re-test COA" name="retest_coa" type="object"
+							states="rejected" />
+						<button string="Set to Draft" name="set_to_draft" type="object"
+							states="approved,rejected,retest" />
+						<field name="state" widget="statusbar" />
+					</header>
+					<sheet width="500">
+						<group>
+							<group>
+								<field name="product_id" on_change="onchange_product(product_id)"
+									attrs="{'readonly':[('state','in',['approved','rejected'])]}" />
+								<field name="name"
+									attrs="{'readonly':[('state','in',['approved','rejected'])]}" />
+								<field name="stock_production_lot_id" domain="[('product_id','=',product_id)]"
+									attrs="{'readonly':[('state','in',['approved','rejected'])]}" />
+							</group>
+							<group>
+								<field name="partner_id"
+									attrs="{'readonly':[('state','in',['approved','rejected'])]}" />
+								<field name="date"
+									attrs="{'readonly':[('state','in',['approved','rejected'])]}" />
+							</group>
+							<group colspan="1" col="1">
+								<h4>Vendor COA</h4>
+								<field name="vendor_coa" filename="vendor_coa_nm" nolabel="1" />
+								<field name="vendor_coa_nm" nolabel="1" />
+							</group>
+							<group colspan="1" col="1">
+								<h4>3rd Party COA</h4>
+								<field name="3rd_coa" filename="3rd_coa_nm" nolabel="1" />
+								<field name="3rd_coa_nm" nolabel="1" />
+							</group>
+						</group>
+						<notebook colspan="4">
+							<page string="Product Reqs">
+								<field name="coa_specs_id" nolabel="1">
+									<tree string="COA Specs" editable="bottom"
+										colors="black:ok==True; red:ok==False">
+										<field name="specs_id" domain="[('product_id','=',parent.product_id)]"
+											on_change="onchange_specs(specs_id)" />
+										<field name="name" />
+										<field name="indicator" on_change="onchange_value(specs_id,indicator,value)" />
+										<field name="value" on_change="onchange_value(specs_id,indicator,value)" />
+										<field name="unit" />
+										<field name="ok" invisible="1" />
+									</tree>
+								</field>
+							</page>
+							<page string="Notes">
+								<field name="notes" nolabel="1" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="product_product_normal_form_view_gmp" model="ir.ui.view">
+			<field name="model">product.product</field>
+			<field name="inherit_id" ref="product.product_normal_form_view" />
+			<field name="name">view.product.product.inherit.form</field>
+			<field name="arch" type="xml">
+				<field name="default_code" position="after">
+					<field name="cas_number" />
+				</field>
+				<notebook position="inside">
+					<page string="GMP" groups="saasier_document_page.group_sop_approver">
+						<group>
+							<group>
+								<field name="sample_size" />
+								<field name="gmp_apply" />
+								<field name="test_method" />
+							</group>
+						</group>
+						<separator string="Product Qualifications" />
+						<field name="product_specs_id" widget="one2many_list"
+							nolabel="1">
+							<tree editable="bottom">
+								<field name="name" />
+								<field name="indicator" />
+								<field name="value" />
+								<field name="unit" />
+							</tree>
+						</field>
+						<separator string="Labs that can test this product" />
+						<field name="labs_ids" />
+					</page>
+				</notebook>
+			</field>
+		</record>
+
+		<!-- <record id="base_view_partner_form_gmp" model="ir.ui.view"> <field 
+			name="model">res.partner</field> <field name="inherit_id" ref="base.view_partner_form" 
+			/> <field name="name">view.res.partner.form.inherit</field> <field name="arch" 
+			type="xml"> <notebook position="inside"> <page string="Vendor Qualification"> 
+			<group> <field name="gmp_apply" /> <field name="qualification_status" /> 
+			</group> </page> </notebook> </field> </record> -->
+
+
+		<menuitem id="gmp" name="GMP" />
+
+		<menuitem id="gmp_compliance_menu" name="GMP Compliance"
+			parent="gmp" />
+
+		<menuitem id="gmp_compliance_reviews_menu" name="Reviews"
+			parent="gmp_compliance_menu" action="gmp_compliance_reviews_action" />
+
+		<menuitem id="gmp_compliance_coa_menu" name="COAs"
+			parent="gmp_compliance_menu" action="gmp_compliance_coa_action" />
+
+		<menuitem id="gmp_compliance_audits_menu" name="Audits"
+			parent="gmp_compliance_menu" action="gmp_compliance_audits_action" />
+
+		<menuitem id="gmp_compliance_products_menu" name="Products"
+			parent="gmp_compliance_menu" action="gmp_compliance_products_action" />
+
+		<menuitem id="gmp_compliance_claims_menu" name="Claims"
+			parent="gmp_compliance_menu" action="gmp_compliance_claims_action" />
+
+		<menuitem id="gmp_maintenance_menu" name="Maintenance"
+			parent="gmp" />
+		<menuitem id="gmp_maintenance_orders_menu" name="Maintenance Orders"
+			parent="gmp_maintenance_menu" action="gmp_maintenance_orders_action" />
+
+		<menuitem id="gmp_manuals_menu" name="Manuals" parent="gmp" />
+		<menuitem id="gmp_manuals_sop_menu" name="SOPs" parent="gmp_manuals_menu"
+			action="gmp_manuals_sop_action" />
+		<menuitem id="gmp_manuals_manuals_menu" name="Manuals"
+			parent="gmp_manuals_menu" action="gmp_manuals_manuals_action" />
+
+		<menuitem id="gmp_configuration_parent_menu" name="Configuration"
+			parent="gmp" />
+		<menuitem id="gmp_configuration_menu" name="GMP Settings"
+			parent="gmp_configuration_parent_menu" action="action_gmp_config" />
+
+		<menuitem action="stock.action_production_lot_form" id="menu_action_production_lot_gmp"
+			parent="gmp_compliance_menu" groups="stock.group_production_lot"
+			sequence="5" />
+
+		<!-- <record id="product_search_form_view_gmp" model="ir.ui.view"> -->
+		<!-- <field name="name">View GMP Filter Product</field> -->
+		<!-- <field name="model">product.product</field> -->
+		<!-- <field name="inherit_id" ref="product.product_search_form_view"/> -->
+		<!-- <field name="arch" type="xml"> -->
+		<!-- <filter name="filter_to_sell" position="before"> -->
+		<!-- <filter name="filter_gmp" string="GMP Applied" icon="terp-accessories-archiver+" 
+			domain="[('gmp_apply', '=', 'y')]"/> -->
+		<!-- </filter> -->
+		<!-- </field> -->
+		<!-- </record> -->
+
+	</data>
+</openerp>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+gmp_coa access,gmp.coa access,gmp.model_gmp_coa,base.group_user,1,1,1,1
+gmp_product_specs access,gmp.product_specs access,gmp.model_gmp_product_specs,base.group_user,1,1,1,1
+gmp_product_specs write access,gmp.product_specs write access,gmp.model_gmp_product_specs,saasier_document_page.group_sop_reviewer,1,1,1,1
+gmp related sop, access_gmp_related_sop,gmp.model_gmp_related_sop,saasier_document_page.group_sop_reviewer,1,1,1,1
+gmp_asset.asset,gmp_asset_asset,asset_barcode.model_asset_asset,mrp.group_mrp_manager,1,1,1,1
+gmp_asset.asset,gmp_asset_asset,asset.model_asset_state,mrp.group_mrp_manager,1,1,1,1
+document_page.permissions,gmp_page_permissions,saasier_document_page.model_document_page_permissions,saasier_document_page.group_sop_reviewer,1,1,1,1
+saasier_edi_access,saasier.edi.access,saasier_customer.model_saasier_edi_access,base.group_user,1,1,1,1
+saasier_edi,saasier.edi,saasier_customer.model_saasier_edi,base.group_user,1,1,1,1

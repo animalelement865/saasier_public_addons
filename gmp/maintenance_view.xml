@@ -1,0 +1,141 @@
+<openerp>
+	<data>
+        <menuitem name="Equipments"
+            action="asset.action_assets"
+            id="menu_maintenance_assets_equipments"
+            parent="gmp_maintenance_menu"
+            sequence="1"/>
+        
+        <record id="view_sop_mro_view" model="ir.ui.view">
+			<field name="name">MRO</field>
+			<field name="model">mro.order</field>
+			<field name="inherit_id" ref="mro.mro_order_form_view" />
+			<field name="arch" type="xml">
+				<page string="Tools" position="before">
+					<page string="SOPs">
+						<field name="sop_ids" />
+					</page>
+				</page>
+			</field>
+		</record>
+		
+		<record id="view_sop_mro_task_tree_view" model="ir.ui.view">
+			<field name="name">Task</field>
+			<field name="model">mro.task</field>
+			<field name="inherit_id" ref="mro.mro_task_tree_view" />
+			<field name="arch" type="xml">
+				<field name="maintenance_type" position="after">
+					<field name="mo_id" />
+				</field>
+			</field>
+		</record>
+		<record id="view_sop_mro_task_form_view" model="ir.ui.view">
+			<field name="name">Task</field>
+			<field name="model">mro.task</field>
+			<field name="inherit_id" ref="mro.mro_task_form_view" />
+			<field name="arch" type="xml">
+				<field name="maintenance_type" position="after">
+					<field name="mo_id" readonly="1"/>
+				</field>
+				<page string="Tools" position="before">
+					<page string="SOPs">
+						<field name="sop_ids" />
+					</page>
+				</page>
+			</field>
+		</record>
+        
+		<record id="recurring_maintenance_tree_view" model="ir.ui.view">
+			<field name="name">Recurring Maintenance</field>
+			<field name="model">mro.recurring</field>
+			<field name="view_type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Recurring Maintenance">
+					<field name="asset_id" />
+					<field name="name" />
+					<field name="location_id" />
+					<field name="frequency" />
+					<field name="maintenance_type" />
+					<field name="responsible_id" />
+				</tree>
+			</field>
+		</record>
+		<record id="recurring_maintenance_form_view" model="ir.ui.view">
+			<field name="name">Recurring Maintenance</field>
+			<field name="model">mro.recurring</field>
+			<field name="view_type">form</field>
+			<field name="arch" type="xml">
+				<form string="Recurring Maintenance" version="7.0">
+					<sheet>
+						<group>
+	                        <div class="oe_title">
+	                            <label for="name" class="oe_edit_only"/>
+	                            <h1>
+	                                <field name="name"/>
+	                            </h1>
+	                        </div>
+						</group>
+						<group colspan="2" col="4">
+							<group>
+								<field name="asset_id" />
+								<field name="maintenance_type" />
+								<field name="location_id" />
+								<field name="frequency" />
+								<field name="responsible_id" />
+							</group>
+							<group>
+								<group colspan="2" col="2">
+									<b><i><u>Settings</u></i></b>
+								</group>
+								<field name="first_schedule" />
+								<label for="recurring_amount" />
+								<div class="address_format">
+									<field name="recurring_amount" placeholder="Recurring amount" style="width: 20%%" class="oe_inline" />
+									<field name="recurring_period" placeholder="Recurring period" style="width: 60%%"/>
+								</div>
+							</group>
+						</group>
+						<notebook>
+							<page string="Maintenance List">
+								<button name="create_maintenance_sequence" class="oe_link" string="Generate Next Sets of Maintenance" type="object"/>
+								<field name="mro_order_ids" nolabel="1" colspan="2" />
+							</page>
+							<page string="SOPs">
+								<field name="sop_ids" nolabel="1" colspan="2" />
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="recurring_maintenance_search_view" model="ir.ui.view">
+			<field name="name">Recurring Maintenance</field>
+			<field name="model">mro.recurring</field>
+			<field name="arch" type="xml">
+				<search string="Recurring Maintenance">
+					<field name="asset_id" />
+					<field name="location_id" />
+					<field name="frequency" />
+					<field name="maintenance_type" />
+					<field name="responsible_id" />
+				</search>
+			</field>
+		</record>
+		<record id="action_recurring_maintenance" model="ir.actions.act_window">
+            <field name="name">Recurring Maintenance</field>
+            <field name="res_model">mro.recurring</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="recurring_maintenance_tree_view"/>
+            <field name="search_view_id" ref="recurring_maintenance_search_view"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click here to create new Recurring Maintenance. 
+              </p>
+            </field>
+        </record>
+        <menuitem id="menu_recurring_maintenance" sequence="5" parent="gmp_maintenance_menu" name="Recurring Maintenance" action="action_recurring_maintenance"/>
+	</data>
+</openerp>

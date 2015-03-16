@@ -1,0 +1,28 @@
+<openerp>
+    <data>
+        <record id="view_gmp_conf_company_form" model="ir.ui.view">
+            <field name="name">View GMP Configuration</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <page string="Configuration" position="inside">
+                    <group colspan="2" col="4">
+                        <separator string="GMP" /><newline />
+                        <group>
+                            <field name="initial_audit_required" />
+                            <field name="followup_audit_required" on_change="onchange_audit(followup_audit_required)"/>
+                            <field name="followup_audit_freq" attrs="{'invisible':[('followup_audit_required','=',False)]}"/>
+                            <field name="coa_verification" on_change="onchange_coa(coa_verification)"/>
+                            <field name="number_of_coa" attrs="{'invisible':[('coa_verification','=',False)]}" />
+                            <field name="system_date" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="sop_ids" nolabel="1"/>
+                        </group>
+                    </group>
+                </page>
+            </field>
+        </record>
+    
+    </data>
+</openerp>

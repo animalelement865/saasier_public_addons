@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+		<record id="view_res_partner_gmp_filter" model="ir.ui.view">
+			<field name="name">GMP Partner Search</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_res_partner_filter" />
+			<field name="arch" type="xml">
+				<filter name="supplier" position="after">
+					<filter string="GMP Vendor" name="gmp" domain="[('gmp_vendor','=',1)]" help="GMP Vendor"/>
+				</filter>
+			</field>
+		</record>
+        <record id="gmp_compliance_vendors_action" model="ir.actions.act_window">
+            <field name="name">Vendor/Supplier</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain" eval="[('supplier','=',True)]" />
+            <field name="context">{'search_default_supplier': 1,'search_default_gmp':1,'default_customer': 0,'default_supplier': 1,'default_gmp_vendor':1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to a new Partner Record.</p>
+            </field>
+        </record>
+
+        <record id="gmp_on_partner_view" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="name">view.product.product.inherit.form</field>
+            <field name="arch" type="xml">
+                <field name="website" position="after">
+                    <field name="gmp_vendor" attrs="{'invisible':[('supplier','=',False)]}"/>
+                    <field name="been_certified" invisible="1"/>
+                </field>
+                <notebook position="inside">
+                    <page string="Vendor Qualification"
+                        attrs="{'invisible':[('gmp_vendor','=',False)]}">
+                        <group>
+                            <label for="qlf_status" />
+                            <h3>
+                                <field name="qlf_status" />
+                            </h3>
+                        </group>
+                        <separator string="Qualification Summaries" />
+                        <group>
+                            <field name="initial_audit_required" invisible="1"/>
+                            <field name="followup_audit_required" invisible="1"/>
+                            <field name="coa_verification_required" invisible="1"/>
+                            <field name="number_of_coa" invisible="1"/>
+                            <field name="followup_audit_freq" invisible="1"/>
+                            
+                            <field name="initial_audit" />
+                            <field name="followup_audit" />
+                            <field name="coa_verification" />
+                            <field name="number_verified_coa" />
+<!--                             <field name="number_passed_audit" /> -->
+                        </group>
+
+                        <separator string="Certificates of Analysis" />
+                        <field name="coa_ids" nolabel="1"
+                            widget="one2many_list" readonly="1" />
+                        <separator string="Audit History" />
+                        <field name="audit_ids" nolabel="1"
+                            widget="one2many_list" readonly="1" />
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <menuitem id="gmp_compliance_vendors_menu" name="Vendors"
+            parent="gmp_compliance_menu" action="gmp_compliance_vendors_action" />
+
+    </data>
+</openerp>

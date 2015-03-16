@@ -1,0 +1,70 @@
+<openerp>
+    <data>
+        <record id="view_gmp_config_settings" model="ir.ui.view">
+            <field name="name">GMP Settings</field>
+            <field name="model">gmp.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="Configure GMP" version="7.0" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <field name="has_default_company" invisible="1" />
+                    <group groups="base.group_multi_company">
+                        <div>
+                            <div attrs="{'invisible': [('has_default_company', '=', True)]}">
+                                <label for="company_id" string="Select Company"/>
+                                <field name="company_id"
+                                    widget="selection"
+                                    class="oe_inline"/>
+                            </div>
+                        </div>
+                    </group>
+                    <separator string="Associated SOPs" />
+                    <group>
+                        <field name="sop_ids" colspan="2" nolabel="1"/>
+                    </group>
+                    <separator string="Vendor Qualification Requirements" />
+                    <group>
+                        <label for="id" string="Options"/>
+                        <div name="gmp_config">
+                            <div>
+                                <label for="initial_audit_required"/>
+                                <field name="initial_audit_required" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="followup_audit_required"/>
+                                <field name="followup_audit_required" class="oe_inline"/>
+                            </div>
+                            <div attrs="{'invisible':[('followup_audit_required','=',False)]}">
+                                <label for="followup_audit_freq"/>
+                                <field name="followup_audit_freq" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="coa_verification"/>
+                                <field name="coa_verification" class="oe_inline"/>
+                            </div>
+                            <div attrs="{'invisible':[('coa_verification','=',False)]}">
+                                <label for="number_of_coa"/>
+                                <field name="number_of_coa" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_gmp_config" model="ir.actions.act_window">
+            <field name="name">Configure GMP</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gmp.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="menu_gmp_config" name="GMP" parent="base.menu_config"
+            sequence="14" action="action_gmp_config"/>
+
+    </data>
+</openerp>

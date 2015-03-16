@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../NLP/.idea/NLP.iml" filepath="$PROJECT_DIR$/../NLP/.idea/NLP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PyQT_fp.iml" filepath="$PROJECT_DIR$/.idea/PyQT_fp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../SPAM_MPI/.idea/SPAM_MPI.iml" filepath="$PROJECT_DIR$/../SPAM_MPI/.idea/SPAM_MPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../illinois_pyqt/.idea/illinois_pyqt.iml" filepath="$PROJECT_DIR$/../illinois_pyqt/.idea/illinois_pyqt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../rubik/.idea/rubik.iml" filepath="$PROJECT_DIR$/../rubik/.idea/rubik.iml" />
+    </modules>
+  </component>
+</project>
+

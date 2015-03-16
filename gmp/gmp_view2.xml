@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+    <data>
+        <record id="gmp_compliance_reviews_action" model="ir.actions.act_window">
+            <field name="name">Reviews</field>
+            <field name="res_model">gmp.reviews</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new reviews record.</p>
+            </field>
+        </record>
+
+        <record id="gmp_compliance_audits_action" model="ir.actions.act_window">
+            <field name="name">Audits</field>
+            <field name="res_model">gmp.audits</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new audit record.</p>
+            </field>
+
+        </record>
+
+        <record id="gmp_compliance_claims_action" model="ir.actions.act_window">
+            <field name="name">Claims</field>
+            <field name="res_model">gmp.claims</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new claims record.</p>
+            </field>
+
+        </record>
+
+        <record id="gmp_compliance_products_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="res_model">products.products</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new product record.</p>
+            </field>
+        </record>
+
+        <record id="manuals" model="document.page">
+            <field name="name">Manuals</field>
+            <field name="type">category</field>
+        </record>
+  		
+                
+        <record id="gmp_compliance_vendors_action" model="ir.actions.act_window">
+            <field name="name">Vendors</field>
+            <field name="res_model">gmp.audits</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new vendor record.</p>
+            </field>
+
+        </record>
+
+        <record id="gmp_compliance_coa_action" model="ir.actions.act_window">
+            <field name="name">COAs</field>
+            <field name="res_model">gmp.coa</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+            </field>
+        </record>
+
+        <record id="gmp_compliance_coa_form_view" mode="ir.ui.view">
+            <field name="name">gmp.compliance.coa.form.view</field>
+            <field name="view_type">form</field>
+            <field name="model">gmp.coa</field>
+            <field name="arch" type="xml">
+                <form string="COAs">
+                    <field name="product_id" />
+                    <field name="partner_id" />
+                    <field name="stock_production_lot_id" />
+                    <field name="date" />
+                    <field name="status" />
+                </form>
+            </field>
+        </record>
+
+        <record id="gmp_maintenance_orders_action" model="ir.actions.act_window">
+            <field name="name">Maintenance Orders</field>
+            <field name="res_model">gmp.maintenance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+            </field>
+
+        </record>
+
+        <record id="gmp_manuals_manuals_action" model="ir.actions.act_window">
+            <field name="name">Manuals</field>
+            <field name="res_model">document.page</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="document_page.view_wiki_tree" />
+            <field name="search_view_id" ref="document_page.view_wiki_filter" />
+            <field name="help">Manuals of your management systems.
+            </field>
+            <field name="domain" eval="[('parent_id','=',ref('manuals'))]" />
+        </record>
+
+        <record id="gmp_manuals_sop_action" model="ir.actions.act_window">
+            <field name="name">SOPs</field>
+            <field name="res_model">document.page</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="document_page.view_wiki_tree" />
+            <field name="search_view_id" ref="document_page.view_wiki_filter" />
+            <field name="help">Manuals of your management systems.
+            </field>
+            <field name="domain" eval="[('parent_id','=',ref('manuals'))]" />
+        </record>
+
+        <record model="ir.actions.act_window" id="action_manuals">
+            <field name="name">Manuals</field>
+            <field name="res_model">document.page</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="document_page.view_wiki_tree" />
+            <field name="search_view_id" ref="document_page.view_wiki_filter" />
+            <field name="help">Manuals of your management systems.
+            </field>
+            <field name="domain" eval="[('parent_id','=',ref('manuals'))]" />
+        </record>
+
+        <record id="gmp_reports_outcompliance_action" model="ir.actions.act_window">
+            <field name="name">Out of Compliance</field>
+            <field name="res_model">gmp.sop</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+            </field>
+
+        </record>
+
+        <record id="gmp_reports_adverseevents_action" model="ir.actions.act_window">
+            <field name="name">Adverse Events</field>
+            <field name="res_model">gmp.adverseevents</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+            </field>
+
+        </record>
+
+        <record id="gmp_configuration_categories_action" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">gmp.categories</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+            </field>
+
+        </record>
+
+        <record id="gmp_configuration_approvals_action" model="ir.actions.act_window">
+            <field name="name">Approvals</field>
+            <field name="res_model">gmp.approvals</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+            </field>
+        </record>
+
+
+        <record id="gmp_configuration_vendorqualification_action"
+            model="ir.actions.act_window">
+            <field name="name">Vendor Qualification</field>
+            <field name="res_model">gmp.vendorqualification</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+            </field>
+        </record>
+
+        <record id="gmp_configuration_recurringmaintenance_action"
+            model="ir.actions.act_window">
+            <field name="name">Recurring Maintenance</field>
+            <field name="res_model">gmp.recurringmaintenance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Click Create to add a new COA record.</p>
+            </field>
+        </record>
+
+
+        <menuitem id="gmp" name="GMP" />
+
+        <menuitem id="gmp_compliance_menu" name="GMP Compliance"
+            parent="gmp" />
+        <menuitem id="gmp_compliance_reviews_menu" name="Reviews"
+            parent="gmp_compliance_menu" action="gmp_compliance_reviews_action" />
+        <menuitem id="gmp_compliance_audits_menu" name="Audits"
+            parent="gmp_compliance_menu" action="gmp_compliance_audits_action" />
+        <menuitem id="gmp_compliance_claims_menu" name="Claims"
+            parent="gmp_compliance_menu" action="gmp_compliance_claims_action" />
+
+        <menuitem id="gmp_compliance_products_menu" name="Products"
+            parent="gmp_compliance_menu" action="gmp_compliance_products_action" />
+
+        <menuitem id="gmp_compliance_vendors_menu" name="Vendors"
+            parent="gmp_compliance_menu" action="gmp_compliance_vendors_action" />
+
+        <menuitem id="gmp_compliance_coa_menu" name="COAs"
+            parent="gmp_compliance_menu" action="gmp_compliance_coa_action" />
+        <menuitem id="gmp_maintenance_menu" name="Maintenance"
+            parent="gmp" />
+        <menuitem id="gmp_maintenance_orders_menu" name="Maintenance Orders"
+            parent="gmp_maintenance_menu" action="gmp_maintenance_orders_action" />
+
+        <menuitem id="gmp_manuals_menu" name="Manuals" parent="gmp" />
+        <menuitem id="gmp_manuals_sop_menu" name="SOPs"
+            parent="gmp_manuals_menu" action="gmp_manuals_sop_action" />
+        <menuitem id="gmp_manuals_manuals_menu" name="Manuals"
+            parent="gmp_manuals_menu" action="gmp_manuals_manuals_action" />
+        <menuitem id="gmp_reports_menu" name="Reports" parent="gmp" />
+
+        <menuitem id="gmp_reports_outcompliance_menu" name="Out of Compliance"
+            parent="gmp_reports_menu" action="gmp_reports_outcompliance_action" />
+
+        <menuitem id="gmp_reports_adverseevents_menu" name="Adverse Events"
+            parent="gmp_reports_menu" action="gmp_reports_adverseevents_action" />
+
+        <menuitem id="gmp_configuration_menu" name="Configuration"
+            parent="gmp" />
+
+        <menuitem id="gmp_configuration_categories_menu" name="Categories"
+            parent="gmp_configuration_menu" action="gmp_configuration_categories_action" />
+
+        <menuitem id="gmp_configuration_approvals_menu" name="Approvals"
+            parent="gmp_configuration_menu" action="gmp_configuration_approvals_action" />
+
+        <menuitem id="gmp_configuration_vendorqualification_menu"
+            name="Vendor Qualification" parent="gmp_configuration_menu"
+            action="gmp_configuration_vendorqualification_action" />
+        <menuitem id="gmp_configuration_recurringmaintenance_menu"
+            name="Recurring Maintenance" parent="gmp_configuration_menu"
+            action="gmp_configuration_recurringmaintenance_action" />
+
+
+    </data>
+</openerp>
+

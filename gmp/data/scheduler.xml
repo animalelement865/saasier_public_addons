@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record forcecreate="True" id="ir_cron_update_date" model="ir.cron">
+            <field name="name">Update System's/Database's Date</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'res.company'" name="model"/>
+            <field eval="'run_system_date'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+    </data>
+</openerp>
