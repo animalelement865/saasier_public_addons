@@ -3,6 +3,8 @@ saasier_public_addons
 
 SaaSier OpenERP Addons
 
+gmp - Module for tracking issues related to 21 CFR Part 111 for Dietary Supplement companies. 
+
 lob_connector - Integration with www.lob.com. Adds an option to have Lob.com mail a check for a Supplier Invoice. 
 
 mrp_custom - Adds options to Routing to defines Work Orders based on additional options. The number of Work Orders can be based on the number of products in the BOM or a fixed amount. 
