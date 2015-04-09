@@ -3,6 +3,8 @@ saasier_public_addons
 
 SaaSier OpenERP Addons
 
+saasier_shipping - Shipping Module for OpenERP 7
+
 gmp - Module for tracking issues related to 21 CFR Part 111 for Dietary Supplement companies. 
 
 lob_connector - Integration with www.lob.com. Adds an option to have Lob.com mail a check for a Supplier Invoice. 
