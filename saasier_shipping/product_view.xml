@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="product_normal_form_view_for_saasier" model="ir.ui.view">
+            <field name="name">product.normal.form.for.saasier</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Inventory']//field[@name='weight_net']" position="after">
+                    <field name="length" />
+                    <field name="width" />
+                    <field name="height" />
+                </xpath>
+				<field name="weight" position="replace"/>
+				<field name="volume" position="replace"/>
+				<field name="list_price" position="after">
+					<field name="HSTariffNumber"/>
+				</field>
+            </field>
+        </record>
+		
+    </data>
+</openerp>

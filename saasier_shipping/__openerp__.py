@@ -1,0 +1,26 @@
+{
+    "name" : "saasier_shipping",
+    "version" : "1.0",
+  
+    "author" : "Chris Jones",
+    "description": """Shipping Module""",
+    "website" : "www.saasier.com",
+    "category" : " ",
+    "depends": ['base','delivery','stock','stock_cancel','stock_picking_cancel','report_webkit'],
+    "data" : [
+       "security/ir.model.access.csv",
+       "wizard/merge_pdf_view.xml",
+       "wizard/dispatch_batch.xml",
+       "wizard/dispatch_sequence.xml",
+       "wizard/ups_export_csv_view.xml",
+       "wizard/usps_datapac_export_csv_view.xml",
+       "stock_view.xml",
+       "stock_email_view.xml",
+       "report_view.xml",
+       "product_view.xml",
+       "res_config_view.xml",
+    ],
+    "installable": True,
+    "auto_install": False,
+    "application": True,
+}

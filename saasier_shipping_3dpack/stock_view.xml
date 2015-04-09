@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+     <record id="view_picking_bin_packaging_form" model="ir.ui.view">
+            <field name="name">stock.picking.bin.packaging.form</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header//button[@name='button_cancel']" position="after">
+                    <button name="call_bin_packing_api" string="3D BinPackaging Products" type="object"  groups="base.group_sale_manager,base.group_user" class="oe_highlight" states="draft,confirmed,assigned"/>
+                </xpath> 
+            </field>
+        </record>
+	
+    </data>
+</openerp>

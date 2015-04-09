@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!--  Change Product Quantity -->
+        
+        <record id="dispatch_consignment_wizard" model="ir.ui.view">
+            <field name="name">dispatch.consignment.wizard</field>
+            <field name="model">dispatch.consignment</field>
+            <field name="arch" type="xml">
+                <form string="Dispatch Batch" version="7.0">
+                    <group>
+                         <field name="batch" />
+                    </group>
+                    <footer>
+                        <button name="stock_order" string="Dispatch Order"
+                             type="object" class="oe_highlight"  context="{'From_wizard_lable':True}"/>
+                             or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                    
+                </form>
+            </field>
+        </record>
+
+<!--         <record id="action_dispatch_consignment" model="ir.actions.act_window">
+            <field name="name">Dispatch Batch</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dispatch.consignment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>            
+        </record>
+       
+       <act_window name="Dispatch Batch"
+            res_model="dispatch.consignment"
+            src_model="stock.picking.out"
+            view_mode="form"
+            target="new"
+            key2="client_action_multi"
+            id="action_dispatch_consignment" /> -->
+			
+    </data>
+</openerp>    

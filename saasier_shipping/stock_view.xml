@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+     <record id="saasier_shipping_res_partner_form" model="ir.ui.view">
+		<field name="name">saasier.shipping.res.partner.form</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form"/>
+		<field name="arch" type="xml">
+			<field name="website" position="after">
+				<field name="address_validation"/>
+			</field>
+		</field> 
+    </record>
+
+     <record id="view_picking_form_new2" model="ir.ui.view">
+		<field name="name">stock.picking.form.new2</field>
+		<field name="model">stock.picking.out</field>
+		<field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
+		<field name="arch" type="xml">
+			<field name="weight" position="replace">
+			</field>				
+			<field name="weight_net" position="replace">
+			</field>
+			<field name="carrier_id" position="replace">
+			</field>
+			<field name="carrier_tracking_ref" position="replace">
+			</field>
+			<field name="number_of_packages" position="replace">
+			</field>	
+			<field name="stock_journal_id" position="after">
+				<field name="carrier_tracking_ref"/>
+				<!-- <field name="cron_label_message"/> -->
+				<field name="url_tracking_ref" widget="url"/>
+			</field>
+		</field> 
+    </record>
+
+     <record id="view_picking_form_new1" model="ir.ui.view">
+            <field name="name">stock.picking.form.new1</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+				<field name="state" position="replace">
+                    <field name="state" nolabel="1" readonly="1" widget="statusbar" statusbar_visible="draft,auto,confirmed,assigned,ship_queue,done,label-sent,pre_transit,in_transit,out_for_delivery,exception,exception" statusbar_colors='{"draft":"blue","auto":"blue", "confirmed":"blue","assigned":"blue","exception":"red","cancel":"red"}'/>
+                </field>
+				<xpath expr="//field[@name='origin']" position="after">
+
+                    <field name="error_note" groups="base.group_sale_manager,base.group_user"/>
+                    <field name="faulty" groups="base.group_sale_manager,base.group_user"/>
+                </xpath>
+                
+                <button name="draft_force_assign" position="replace">
+                    <button name="replaced_draft_force_assign" states="draft" string="Confirm" type="object" class="oe_highlight" groups="base.group_sale_manager,base.group_user"/>
+                </button>
+
+                <xpath expr="/form/header//button[@name='button_cancel']" position="after">
+                    <button name="packaging_product" string="Package Products" type="object"  groups="base.group_sale_manager,base.group_user" class="oe_highlight" states="draft,confirmed,assigned"/>
+                    <button name="add_to_ship_que" string="Add to Shipping Queue" type="object"  groups="base.group_sale_manager,base.group_user"  states="draft,confirmed,assigned"/>
+                    <button name="remove_from_ship_que" string="Remove From Shipping Queue" type="object"  groups="base.group_sale_manager,base.group_user"  states="ship_queue"/>
+					<button name="get_shipment_rate" string="Shipping Calculator" states="draft,confirmed,assigned"  groups="base.group_sale_manager,base.group_user"  type="object" class="oe_highlight"/>
+                    <button name="cancel_shipment" string="Cancel Shipment" icon="gtk-cancel" type="object" groups="base.group_sale_manager,base.group_user" states="done,confirmed,assigned,label-sent,pre_transit,in_transit,out_for_delivery,exception"/>
+					<button name="split_order_wr" string="Split Orders Warehouse-wise" groups="base.group_sale_manager,base.group_user" states="draft,confirmed,assigned"  type="object" class="oe_highlight"/>
+                	<button name="send_to_warehouse" string="Send To Warehouse" type="object"  groups="base.group_sale_manager,base.group_user"  states="done"/>
+                </xpath> 
+            </field>
+        </record>
+		
+ 		<!-- below view created by 4devnet for shipping feilds --> 
+		
+        <record id="view_stock_picking_for_shipping" model="ir.ui.view">
+            <field name="name">view.stock.picking.for.shipping</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">	
+				<field name="stock_journal_id" position="after">
+                    <field name="list_tracking_numbers" invisible="1"/>
+					
+					<field name="shipping_carrier" attrs="{'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}" />
+
+                    <field name="shipping_service_freight" attrs="{'invisible': [('shipping_carrier','in',('FEDEX','UPS','USPS','STAMPS','UPS WorldShip CSV','USPS DataPac CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+                    
+					<field name="shipping_service_fedex" attrs="{'invisible': [('shipping_carrier','in',('Freight','UPS','USPS','STAMPS','UPS WorldShip CSV','USPS DataPac CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+
+                    <field name="shipping_service_ups" attrs="{'invisible': [('shipping_carrier','in',('Freight','FEDEX','USPS','STAMPS','USPS DataPac CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+
+                    <field name="shipping_service_usps" attrs="{'invisible': [('shipping_carrier','in',('Freight','FEDEX','UPS','STAMPS','UPS WorldShip CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+
+                    <field name="shipping_service_usps_stamps" attrs="{'invisible': [('shipping_carrier','in',('Freight','FEDEX','UPS','USPS','UPS WorldShip CSV','USPS DataPac CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+
+                    <field name="shipping_packaging_fedex" attrs="{'invisible': [('shipping_carrier','in',('Freight','UPS','USPS','STAMPS','UPS WorldShip CSV','USPS DataPac CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+
+                    <field name="shipping_packaging_ups" attrs="{'invisible': [('shipping_carrier','in',('Freight','FEDEX','USPS','STAMPS','USPS DataPac CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+
+                    <field name="shipping_packaging_usps" attrs="{'invisible': [('shipping_carrier','in',('Freight','FEDEX','UPS','STAMPS','UPS WorldShip CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+
+                    <field name="shipping_packaging_usps_stamps" attrs="{'invisible': [('shipping_carrier','in',('Freight','FEDEX','UPS','USPS','UPS WorldShip CSV','USPS DataPac CSV',False,''))],'readonly': [('state','not in',('draft','auto','confirmed','assigned','ship_queue'))]}"/>
+
+                    <field name="total_weight"/>
+
+                    <field name="exception_description" attrs="{'invisible':[('state','!=','exception')]}"/>
+				</field>
+            </field>
+        </record>  
+		
+ 		<!-- UNS EDITED THIS --> 
+		
+        <record id="view_stock_move_for_shipping" model="ir.ui.view">
+            <field name="name">view.stock.move.for.shipping</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form" />
+            <field name="arch" type="xml">	
+				<group string="Traceability" position="inside">
+                            <label for="carrier_tracking_ref" groups="stock.group_tracking_lot"/>
+                            <div groups="stock.group_tracking_lot">
+                                <field name="carrier_tracking_ref" class="oe_inline"/>
+								<field name="url_tracking_ref" widget="url"/>
+                            </div>
+                            <label for="exception_description" groups="stock.group_tracking_lot"/>
+                            <div groups="stock.group_tracking_lot">
+                                <field name="exception_description" class="oe_inline"/>
+                            </div>
+                            <label for="error_note" groups="base.group_sale_manager,base.group_user,stock.group_tracking_lot"/>
+                            <div groups="base.group_sale_manager,base.group_user,stock.group_tracking_lot">
+                                <field name="error_note" class="oe_inline"/>
+                            </div>
+                            <label for="faulty" groups="stock.group_tracking_lot"/>
+                            <div groups="stock.group_tracking_lot">
+                                <field name="faulty" class="oe_inline"/>
+                            </div>
+<!--                             <field name="last_status_emailed" class="oe_inline"/>
+                            <field name="is_state_changed" class="oe_inline"/> -->
+				</group>
+				<group string="Traceability" position="after">
+					<group string="Refund Informations" groups="base.group_sale_manager,base.group_user">
+						<field name="refund_confirmation_number"/>
+						<field name="refund_id"/>
+						<field name="refund_status"/>
+					</group>
+				</group>
+				<header position="replace">
+					<header>
+						<button name="action_confirm" states="draft" string="Process Later" type="object" class="oe_highlight" groups="base.group_sale_manager,base.group_user"/>
+						<button name="%(stock.action_partial_move_server)d" string="Process Partially" type="action" states="assigned" class="oe_highlight" groups="base.group_sale_manager,base.group_user"/>
+						<button name="action_done" states="draft,assigned,confirmed" string="Process Entirely" type="object" class="oe_highlight" groups="base.group_sale_manager,base.group_user"/>
+						<button name="force_assign" states="confirmed" string="Set Available" type="object" class="oe_highlight" groups="base.group_sale_manager,base.group_user"/>
+						<button name="action_cancel" states="assigned,confirmed" string="Cancel Move" type="object" groups="base.group_sale_manager,base.group_user"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,confirmed,assigned,done,label-sent,pre_transit,in_transit,out_for_delivery,exception,delivered" statusbar_colors="{&quot;waiting&quot;:&quot;blue&quot;,&quot;confirmed&quot;:&quot;blue&quot;}"/>
+                        <field name="label_state" widget="statusbar"/>
+					</header>
+				</header>
+				
+            </field>
+        </record>  
+		
+        <record id="view_stock_move_for_shipping_weight" model="ir.ui.view">
+            <field name="name">view.stock.move.for.shipping.weight</field>
+            <field name="model">stock.move</field>
+            <field name="sequence" eval="1"/>
+            <field name="inherit_id" ref="delivery.view_move_withweight_form" />
+            <field name="arch" type="xml">
+				<label for="weight" position="replace">
+				</label>
+				<field name="weight" position="replace">
+					<group>
+						<field name="override_weight"/>
+						<field name="insured"/>
+						<field name="value_insured"/>
+					</group>
+				</field>
+
+ 				<field name="weight_uom_id" position="replace">
+					<field name="weight_uom_id" invisible="1"/>
+				</field>
+				
+				<field name="weight_net" position="replace">
+					<field name="weight_net" invisible="1"/>
+				</field>
+				
+            </field>
+        </record>
+ 		<!-- UNS : change the state field bar in stock.picking.out --> 
+        <record id="view_stock_picking_out_for_shipping1" model="ir.ui.view">
+            <field name="name">view.stock.picking.out.for.shipping1</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_out_form" />
+            <field name="arch" type="xml">
+				<field name="state" position="replace">
+                    <field name="state" nolabel="1" readonly="1" widget="statusbar" statusbar_visible="draft,auto,confirmed,assigned,ship_queue,done,label-sent,pre_transit,in_transit,out_for_delivery,exception,exception" statusbar_colors='{"draft":"blue","auto":"blue", "confirmed":"blue","assigned":"blue","exception":"red","cancel":"red"}'/>
+				</field>
+				<button string="Return Products" position="replace">
+                    <button name="%(stock.act_stock_return_picking)d" string="Return Products"  groups="base.group_sale_manager,base.group_user" states="done" type="action"/>
+				</button>
+				<button string="Deliver" position="replace">
+				    <button name="action_process" states="assigned" string="Deliver" type="object" groups="base.group_sale_manager,base.group_user" class="oe_highlight"/>
+				</button>
+
+
+				<button string="Print Delivery Slip" position="replace">
+				    <button name="%(stock.report_picking_list_out)d" string="Print Delivery Slip" type="action"  groups="base.group_sale_manager,base.group_user" states="done" class="oe_highlight"/>
+				</button>
+            </field>
+        </record>
+		
+        <record id="view_stock_picking_out_for_shipping2" model="ir.ui.view">
+            <field name="name">view.stock.picking.out.for.shipping2</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock_cancel.stock_picking_cancel_out_form" />
+            <field name="arch" type="xml">
+				<button string="Reopen" position="replace">
+					<button name="action_revert_done" invisible="1" string="Reship" states="done,cancel" type="object" icon="gtk-cancel" confirm="Are you sure you want to reopen this stock picking?"  groups="base.group_sale_manager,base.group_user"/>
+				</button>
+            </field>
+        </record> 
+
+		<record id="view_stock_picking_out_for_shipping3" model="ir.ui.view">
+            <field name="name">view.stock.picking.out.for.shipping3</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock_picking_cancel.view_picking_inherit_picking_out_cancel_form" />
+            <field name="arch" type="xml">
+				<button name="button_cancel" position="replace">
+					<button name="button_cancel" invisible="1" states="assigned,confirmed,draft,done" string="_Cancel" icon="gtk-cancel" groups="base.group_sale_manager,base.group_user"/>
+				</button>
+            </field>
+        </record>
+	
+		<record id="view_stock_picking_in_for_shipping33" model="ir.ui.view">
+            <field name="name">view.stock.picking.in.for.shipping33</field>
+            <field name="model">stock.picking.in</field>
+            <field name="inherit_id" ref="stock_picking_cancel.view_picking_inherit_picking_in_cancel_form" />
+            <field name="arch" type="xml">
+				<button name="button_cancel" position="replace">
+					<button name="button_cancel" invisible="1" states="assigned,confirmed,draft,done" string="_Cancel" icon="gtk-cancel" groups="base.group_sale_manager,base.group_user"/>
+				</button>
+            </field>
+        </record>
+	
+        <record id="view_stock_picking_in_for_shipping1" model="ir.ui.view">
+            <field name="name">view.stock.picking.in.for.shipping1</field>
+            <field name="model">stock.picking.in</field>
+            <field name="inherit_id" ref="stock_cancel.stock_picking_cancel_in_form" />
+            <field name="arch" type="xml">
+				<button string="Reopen" position="replace">
+					<button name="action_revert_done" string="Reopen" states="done,cancel" type="object" icon="gtk-cancel" confirm="Are you sure you want to reopen this stock picking?"  groups="base.group_sale_manager,base.group_user"/>
+				</button>
+            </field>
+        </record>
+		
+		<record id="view_stock_picking_in_for_shipping2" model="ir.ui.view">
+            <field name="name">view.stock.picking.for.2</field>
+            <field name="model">stock.picking.in</field>
+            <field name="inherit_id" ref="stock.view_picking_in_form" />
+            <field name="arch" type="xml">
+				<button string="Confirm &amp; Receive" position="replace">
+					<button name="draft_validate" states="draft" groups="base.group_sale_manager,base.group_user" string="Confirm &amp; Receive" type="object" class="oe_highlight"/>
+				</button>
+                
+                <button string="Confirm" position="replace">
+                    <button name="replaced_draft_force_assign" states="draft" string="Confirm" type="object" class="oe_highlight" groups="base.group_sale_manager,base.group_user"/>
+                </button>
+
+				<button name="action_process" position="replace">
+					<button name="action_process" states="assigned" string="Receive"  groups="base.group_sale_manager,base.group_user" type="object" class="oe_highlight"/>
+				</button>
+				<button string="Return Products" position="replace">
+					<button name="%(stock.act_stock_return_picking)d" string="Return Products" groups="base.group_sale_manager,base.group_user"  states="done" type="action"/>
+				</button>
+            </field>
+        </record>
+		
+        <record id="view_stock_picking_for_shipping111" model="ir.ui.view">
+            <field name="name">view.stock.picking.for.shipping111</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock_cancel.stock_picking_cancel_form" />
+            <field name="arch" type="xml">
+				<button string="Reopen" position="replace">
+					<button name="action_revert_done" string="Reship" states="done,cancel" type="object" icon="gtk-cancel" confirm="Are you sure you want to reopen this stock picking?"  groups="base.group_sale_manager,base.group_user"/>
+				</button>
+            </field>
+        </record>
+		
+        <record id="picking_out_tree_updated" model="ir.ui.view">
+            <field name="name">picking.out.tree.updated</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_out_tree" />
+            <field name="arch" type="xml">
+				<tree string="Delivery Orders" position="attributes">
+					<attribute name = "colors">
+					green:state =='delivered';red:state in ('exception','unknown','failure','return_to_sender');grey:state == 'cancel';blue:state == 'draft';grey:state == 'cancel';red:state not in ('cancel','in_transit','out_for_delivery','delivered') and two_days_old==1; orange:state in ('in_transit') and seven_days_old==1
+					</attribute>
+				</tree>
+				<tree string="Delivery Orders" position="inside">
+					<field name="two_days_old" invisible="1"/>
+					<field name="seven_days_old" invisible="1"/>
+				</tree>
+			</field>
+        </record>
+
+ 		<record id="create_shipment_simplest_action" model="ir.actions.server">
+            <field name="name">Generate Shipping Label</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.create_shipment_simplest(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+		
+ 		<record id="call_create_shipment_simplest_action" model="ir.values">
+            <field name="name">Generate Shipping Label</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%create_shipment_simplest_action" />
+            <field name="object" eval="True" />
+        </record>	
+ 
+  		<record id="update_label_status_action" model="ir.actions.server">
+            <field name="name">Update Label Status</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.update_label_status(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+		
+		<record id="call_update_label_status_action" model="ir.values">
+            <field name="name">Update Label Status</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%update_label_status_action" />
+            <field name="object" eval="True" />
+        </record>
+
+		<record id="add_to_shipment_action" model="ir.actions.server">
+            <field name="name">Add to Shipping Queue</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.add_to_ship_que(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+ 
+		<record id="call_add_to_shipment_action" model="ir.values">
+            <field name="name">Add to Shipping Queue</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%add_to_shipment_action" />
+            <field name="object" eval="True" />
+        </record>
+		
+		<record id="remove_from_shipment_action" model="ir.actions.server">
+            <field name="name">Remove From Shipping Queue</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.remove_from_ship_que(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+		
+		<record id="call_remove_from_shipment_action" model="ir.values">
+            <field name="name">Remove From Shipping Queue</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%remove_from_shipment_action" />
+            <field name="object" eval="True" />
+        </record>		
+		
+<!-- 		<record id="cancel_shipment_action" model="ir.actions.server">
+            <field name="name">Cancel Shipment</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.cancel_shipment(cr, uid, context.get('active_ids'), context=context)</field>
+        </record> -->
+ 
+<!-- 		<record id="call_cancel_shipment_action" model="ir.values">
+            <field name="name">Cancel Shipment</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%cancel_shipment_action" />
+            <field name="object" eval="True" />
+        </record> -->
+ 
+ 	<!--	Customise the action called when clicking on Delivery Order-->
+        <record id="stock.action_picking_tree" model="ir.actions.act_window">
+            <field name="name">Delivery Orders</field>
+            <field name="res_model">stock.picking.out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <!-- <field name="domain">[('type','=','out'),('state','in',('draft','auto','confirmed','assigned','cancel'))]</field> -->
+            <field name="domain">[('type','=','out')]</field>
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address'}</field>
+            <field name="search_view_id" ref="stock.view_picking_out_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a delivery order.
+              </p><p>
+                This is the list of all delivery orders that have to be
+                prepared, according to your different sales orders and your
+                logistics rules.
+              </p>
+            </field>
+        </record>
+
+	<!--	<record id="merge_pdf_action" model="ir.actions.server">
+            <field name="name">Merge Pdf</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.create_shipment_simplest(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+ 
+		<record id="call_merge_pdf_action" model="ir.values">
+            <field name="name">Merge Pdf</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%merge_pdf_action" />
+            <field name="object" eval="True" />
+        </record> -->
+        
+	<!--	<record id="multiple_label_action" model="ir.actions.server">
+            <field name="name">multiple Label</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.print_multiple_label(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+ 
+		<record id="call_multiple_label_action" model="ir.values">
+            <field name="name">Multiple Label</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%multiple_label_action" />
+            <field name="object" eval="True" />
+        </record>  -->
+        
+
+
+<!--	<record id="report_webkit_action" model="ir.actions.report.xml">
+        <field name="report_type">webkit</field>
+        <field name="report_name">webkit.html</field>
+        <field eval="1" name="auto"/>
+        <field name="model">stock.picking.out</field>
+        <field name="code">action = pool.get('stock.picking.out').print_multiple_label(cr, uid, None, context)</field>
+        <field name="type">ir.actions.report.xml</field>
+        <field name="name">Multiple Label</field>
+        <field name="report_rml">shipping_postmaster/report/report_webkit.mako</field>
+        <field name="report_file">shipping_postmaster/report/report_webkit.mako</field>
+    </record>  -->
+        			
+
+
+       
+<!--		<record id="merge_orders_action" model="ir.actions.server">
+            <field name="name">Merge Orders</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.merge_orders(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+ 
+		<record id="call_merge_orders_action" model="ir.values">
+            <field name="name">Merge Orders</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%merge_orders_action" />
+            <field name="object" eval="True" />
+        </record> -->
+
+
+
+        <record id="action_shipping_queue" model="ir.actions.act_window">
+            <field name="name">Shipping Queue</field>
+            <field name="res_model">stock.picking.out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('type','=','out'),('state','=','ship_queue')]</field>
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address'}</field> 
+           <field name="search_view_id" ref="stock.view_picking_out_search"/> 
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a delivery order. 
+              </p><p>
+                This is the list of all delivery orders that have Shipping Queue status.
+              </p>
+            </field>
+        </record>
+		
+        <record id="action_stock_shipping_exceptions" model="ir.actions.act_window">
+            <field name="name">Shipping Exceptions</field>
+            <field name="res_model">stock.picking.out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('type','=','out'),('state','=','exception')]</field>
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address'}</field> 
+           <field name="search_view_id" ref="stock.view_picking_out_search"/> 
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a delivery order. 
+              </p><p>
+                This is the list of all delivery orders that have Shipping Exception status.
+              </p>
+            </field>
+        </record>
+        
+		<menuitem action="action_shipping_queue" id="menu_shipping_queue" parent="stock.menu_stock_warehouse_mgmt" sequence="4"/>
+		<menuitem action="action_stock_shipping_exceptions" id="menu_stock_shipping_exceptions" parent="stock.menu_stock_warehouse_mgmt" sequence="7"/>
+<!-- 		<record id="download_label_action" model="ir.actions.server">
+            <field name="name">Download Label</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.download_label(cr, uid, context.get('active_ids'), context=context)</field>
+        </record> -->
+ 
+<!-- 		<record id="call_download_label_action" model="ir.values">
+            <field name="name">Download Label</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%download_label_action" />
+            <field name="object" eval="True" />
+        </record> -->
+        
+
+<!-- 		<record id="send_to_warehouse_action" model="ir.actions.server">
+            <field name="name">Send to Warehouse</field>
+            <field name="model_id" ref="model_stock_picking_out"/>
+            <field name="state">code</field>
+            <field name="code">self.send_to_warehouse(cr, uid, context.get('active_ids'), context=context)</field>
+        </record>
+ 
+		<record id="call_send_to_warehouse_action" model="ir.values">
+            <field name="name">Send to Warehouse</field>
+            <field name="key2">client_action_multi</field>
+            <field name="model">stock.picking.out</field>
+            <field name="auto">False</field>
+            <field name="value" eval="'ir.actions.server,%d'%send_to_warehouse_action" />
+            <field name="object" eval="True" />
+        </record> -->
+
+
+		<record id="view_stock_picking_out_label_tree" model="ir.ui.view">
+            <field name="name">stock.picking.out.label.tree</field>
+            <field name="model">stock.picking.out.label</field>
+            <field name="arch" type="xml">
+                <tree string="Shipping Label">
+                    <field name="date"/>
+                    <field name="picking_ids"/>
+                    <field name="location_id"/>
+                    <field name="state"/>
+                    <field name="is_label_created"/>
+                    <field name="is_label_printed"/>
+                </tree>
+            </field>
+        </record>
+		
+		<record id="view_stock_picking_out_label_form" model="ir.ui.view">
+            <field name="name">stock.picking.out.label.form</field>
+            <field name="model">stock.picking.out.label</field>
+            <field name="arch" type="xml">
+                <form string="Shipping Label" version="7.0">
+					<header>
+						<button attrs="{'invisible':[('labels_type','not in',['Label Template'])]}" name="print_label_template" class="oe_highlight" string="Print Labels" type="object" groups="base.group_sale_manager,base.group_user"/>
+						<button attrs="{'invisible':[('labels_type','not in',['UPS WorldShip CSV'])]}" name="%(action_worldship_csv_file)d" class="oe_highlight" string="WorldShip CSV FILE" type="action" groups="base.group_sale_manager,base.group_user"/>
+                        <button attrs="{'invisible':[('labels_type','not in',['USPS DataPac CSV'])]}" name="%(action_datapac_csv_file)d" class="oe_highlight" string="DataPac CSV FILE" type="action" groups="base.group_sale_manager,base.group_user"/>
+						<field name="state" nolabel="1" readonly="1" widget="statusbar" statusbar_visible="done,label-printed,label-sent,pre_transit,in_transit,out_for_delivery,exception,delivered" statusbar_colors="{&quot;auto&quot;:&quot;blue&quot;, &quot;confirmed&quot;:&quot;blue&quot;}"/>
+					</header>
+					<sheet>
+						<group>
+								<field name="is_label_created" readonly="1"/>
+								<field name="is_label_printed" readonly="1"/>
+								<field name="labels_type"/>
+								<field name="label_template_id" attrs="{'invisible':[('labels_type','not in',['Label Template'])]}" widget="selection"/>
+								<field name="date"/>
+								<field name="location_id"/>
+						</group>
+						<separator string="Delivery Orders"/>
+						<field name="picking_ids" readonly="0"/>
+					</sheet>
+                </form>
+            </field>
+        </record>
+
+		<record id="action_stock_shipping_label" model="ir.actions.act_window">
+            <field name="name">Shipping Label</field>
+            <field name="res_model">stock.picking.out.label</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+<!--             <field name="domain">[('type','=','out'),('state','=','done')]</field>
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address'}</field> -->
+            <!-- <field name="search_view_id" ref="stock.view_picking_out_search"/> -->
+        </record>
+        
+		<record model="ir.actions.act_window.view" id="action_picking_tree6_tree_view_label">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_stock_picking_out_label_tree"/>
+            <field name="act_window_id" ref="action_stock_shipping_label"/>
+        </record>
+        
+		
+        
+		<menuitem action="action_stock_shipping_label" id="menu_stock_shipping_label" parent="stock.menu_stock_warehouse_mgmt" sequence="6"/>
+
+	<!--	<record id="action_merge_order" model="ir.actions.act_window">
+            <field name="name">Merge Order</field>
+            <field name="res_model">stock.picking.out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="domain">[('type','=','out'),('state','=','merge')]</field>
+            <field name="context">{'default_type': 'out', 'contact_display': 'partner_address'}</field>
+            <field name="search_view_id" ref="stock.view_picking_out_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a delivery order. 
+              </p><p>
+                This is the list of all delivery orders that have Shipping Queue status.
+              </p>
+            </field>
+        </record>
+        
+	        
+		<menuitem action="action_merge_order" id="menu_merge_order" parent="stock.menu_stock_warehouse_mgmt" sequence="5"/> -->
+
+
+	<record id="box_setup_tree" model="ir.ui.view" >
+            <field name="name">box.setup.tree</field>
+            <field name="model">box.setup</field>
+            <field name="arch" type="xml">
+            <tree string="Box Setup" version="7.0" >
+            	<field name="name"/>
+                <field name="height"/>
+                <field name="width"/>
+                <field name="length"/>
+				<field name="weight"/>	
+				<field name="p_height"/>
+				<field name="maximum_weight"/>
+				<field name="box_type" string="Type"/> 	
+			</tree>
+            </field>
+ 	</record>    
+    
+	<record id="box_setup_form" model="ir.ui.view">
+		<field name="name">box.setup.form</field>
+        <field name="model">box.setup</field>
+        <field name="arch" type="xml">
+			<form string="Box Setup" version="7.0">
+            	<div class="oe_title">
+        			<group>
+						<separator colspan="4" string="Dimensions"/>
+						<field name="name"/>
+                		<field name="height"/>
+                		<field name="width"/>
+                		<field name="length"/>
+						<field name="weight"/>
+						<separator colspan="4" string="Maximums"/>
+						<field name="p_height"/>
+						<field name="maximum_weight"/>
+						<separator colspan="4" string="Advanced Options"/>						
+						<field name="box_type" string="Type"/>
+					</group>      		                	
+            	</div>
+        	</form>
+        </field>
+	</record>
+
+	<record id="box_setup_filter" model="ir.ui.view">
+		<field name="name">box.setup.filter</field>
+        <field name="model">box.setup</field>
+        <field name="arch" type="xml">
+        	<search string="Search Box...">
+	       		<filter name="name" string="Name" icon="terp-personal" domain="[]"/>
+				<filter name="p_height" string="Maximum Pallet Height" icon="terp-personal" domain="[]"/>
+				<group expand="0" string="Group By...">
+					<filter name="Type" string="Type" icon="terp-personal" domain="[]" context="{'group_by':'box_type'}"/>               	
+				</group>
+			</search>
+		</field>
+	</record>
+    
+	<record id="action_box_setup_form" model="ir.actions.act_window">
+    	<field name="type">ir.actions.act_window</field>
+        <field name="res_model">box.setup</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>    
+		<field name="search_view_id" ref="box_setup_filter"/>  
+        <field name="context">{}</field>
+	</record>
+  	
+<menuitem action="action_box_setup_form" name="Box Setup" id="menu_action_box_setup_form" 
+            parent="stock.menu_stock_configuration" />
+
+
+	<record id="view_tracking_form_inherit" model="ir.ui.view">
+		<field name="name">view.tracking.form.inherit</field>
+        <field name="model">stock.tracking</field>
+        <field name="inherit_id" ref="stock.view_tracking_form"/>
+        <field name="arch" type="xml">
+     		<field name="active" position="after">
+     			<field name="box_setup_id"/>
+     			<field name="content_type"/>
+     			<field name="other_describe" attrs="{'invisible': [('content_type','not in',('Other',))],'required': [('content_type','in',('Other',))]}"/>
+       		</field>
+       		
+        </field>
+    </record>
+        
+<!--	<record id="view_warehouse_updated" model="ir.ui.view">
+		<field name="name">view.warehouse.updated</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+     		<xpath expr="//group" position="after">
+
+       		</xpath>
+        </field>
+	</record> -->
+
+        <record id="stock.view_warehouse" model="ir.ui.view">
+            <field name="name">stock.warehouse</field>
+            <field name="model">stock.warehouse</field>
+            <field name="arch" type="xml">
+                <form string="Warehouse" version="7.0">
+                    <label for="name" class="oe_edit_only"/>
+                    <h1><field name="name"/></h1>
+                    <group>
+                        <group>
+                            <field name="lot_input_id" groups="stock.group_locations"/>
+                            <field name="lot_stock_id" groups="stock.group_locations"/>
+                            <field name="lot_output_id" groups="stock.group_locations"/>
+                        </group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company" widget="selection"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="ftp"/>
+		     			<field name="server_add"/>
+		     			<field name="username"/>
+		     			<field name="pass"/>
+					<field name="folder_name"/>
+		     			<field name="g_drive"/>
+		     			<field name="email_check"/>
+		     			<field name="email"/>            
+                    </group>
+                </form>
+            </field>
+        </record>
+   
+	<record id="email_label_send_to_warehouse" model="email.template">
+            <field name="name">Label Send To Warehouse</field>
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="email_from">${'chris.jones@animalelement.com'}</field>
+            <field name="email_to"></field>
+            <field name="subject"><![CDATA[Shipping Label]]></field>
+            <field name="body_html">
+                <![CDATA[
+<pre>
+shipping Label              
+</pre> 
+                ]]>
+            </field>
+        </record>
+
+	<record id="view_picking_form_inherit_rate" model="ir.ui.view">
+        	<field name="name">stock.picking.form.inherit.rate</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+            	<notebook position="inside">
+            		<page string="Shipping Rate">	            
+          				<field name="ship_cal_id">
+           					<form string="Shipping Rate" version="7.0"> 
+								<group>	
+									<field name="name"/>
+									<field name="service"/>
+									<field name="rate_description"/>
+									<field name="rate"/>
+									<!-- <field name="tracking_id"/>  THIS WAS REMOVED, SINCE EVERY LINE WILL SHOW THE TOTAL AMOUNT !-->
+								</group>		
+           					</form>
+           					<tree string="Shipping Rate" editable="bottom">
+								<field name="name" readonly="1"/>
+								<field name="service" readonly="1"/>
+								<field name="rate_description" readonly="1"/>
+								<field name="rate" readonly="1"/>
+								<!-- <field name="tracking_id" readonly="1"/> THIS WAS REMOVED, SINCE EVERY LINE WILL SHOW THE TOTAL AMOUNT !--> 
+							</tree>
+						</field>
+					</page> 	
+    			</notebook>	
+		</field>
+	</record>
+	
+
+	<!-- hide column backorder stock journak id and invoice state 4devnet -->
+	<record id="view_picking_in_tree_inherit_stock" model="ir.ui.view">
+            <field name="name">stock.picking.in.tree.inherit.stock</field>
+            <field name="model">stock.picking.in</field>
+            <field name="inherit_id" ref="stock.view_picking_in_tree"/>
+            <field name="arch" type="xml">
+            	<field name="backorder_id" position="replace">
+            		<field name="backorder_id" invisible="1"/>            
+				</field>
+				<field name="invoice_state" groups="account.group_account_invoice" position="replace">
+					<field name="invoice_state" groups="account.group_account_invoice" invisible="1"/>
+				</field>
+				<field name="stock_journal_id" widget="selection" groups="account.group_account_user" position="replace">
+					<field name="stock_journal_id" invisible="1"/>
+				</field>				
+			</field>	
+			
+	</record>
+
+	<record id="view_company_form_inherit" model="ir.ui.view">
+            <field name="name">res.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+            	<notebook position="inside">
+            	   <page string="Shipping Configuration">
+						<separator string="Warehouses" colspan="4"/>
+						<group>
+							<field name="warehouse_ids" nolabel="1" domain="[('company_id.id','=',id)]"/>
+						</group>
+						
+						<separator string="Label Template" colspan="4"/>
+						<group>
+							<field name="label_template_id" widget="selection"/>
+						</group>
+						
+						<separator string="EasyPost" colspan="4"/>
+						<group>
+							<field name="easypost_prod_vs_staging"/>
+							<field name="easypost_api"/>
+							<field name="usps"/>
+							<field name="ups"/>
+							<field name="fedex"/>
+						</group>
+						<separator string="UPS - Third Party Info" colspan="4" attrs="{'invisible':[('ups','=',False)]}"/>
+            	        <group col="4"  attrs="{'invisible':[('ups','=',False)]}">					
+							<field name="ups_third_party_company_id" colspan="4"  attrs="{'invisible':[('ups','=',False)], 'required': ['|','|',('ups_third_party_account','not in',[False,'']),('ups_third_party_country_id','not in',[False,'']),('ups_third_party_postal_code','not in',[False,''])]}"/>
+							<field name="ups_third_party_account" colspan="4"  attrs="{'invisible':[('ups','=',False)], 'required': ['|','|',('ups_third_party_country_id','not in',[False,'']),('ups_third_party_postal_code','not in',[False,'']),('ups_third_party_company_id','not in',[False,''])]}"/>
+							<field name="ups_third_party_country_id" colspan="4"  attrs="{'invisible':[('ups','=',False)], 'required': ['|','|',('ups_third_party_account','not in',[False,'']),('ups_third_party_postal_code','not in',[False,'']),('ups_third_party_company_id','not in',[False,''])]}"/>
+							<field name="ups_third_party_postal_code" colspan="4"  attrs="{'invisible':[('ups','=',False)], 'required': ['|','|',('ups_third_party_country_id','not in',[False,'']),('ups_third_party_account','not in',[False,'']),('ups_third_party_company_id','not in',[False,''])]}"/>
+						</group>
+						
+						<separator string="Stamps" colspan="4"/>
+						
+            	        <group col="4">
+							<newline/>
+							<field name="stamps_prod_vs_staging" colspan="4"/>
+							<field name="stamps_integ_id" colspan="4"/>
+							<field name="stamps_username" colspan="4"/>
+							<field name="stamps_password" colspan="4" />
+							<field name="stamps_balance" colspan="2"/>
+							<button name="refresh_stamps_balance" type="object" string="Refresh Balance" icon="terp-personal" colspan="2"/>
+							<newline/>
+							<field name="amount_purchase_stamps" colspan="2"/>
+							<button name="purchase_stamps_postage" type="object" string="Purchase Balance" icon="terp-personal" colspan="2"/>
+							<newline/>
+						</group>
+						
+						<group col="4">
+							<button name="button_geturl" type="object" string="Get Online Reporting URL" icon="terp-personal" colspan="4"/>
+							<field name="geturl_result" widget="url" colspan="4" readonly="0"/>
+						</group>
+						
+						<separator string="UPS WorldShip CSV" colspan="4"/>
+            	        <group>					
+							<field name="worldship_csv"/>
+						</group>
+                        <separator string="USPS DataPac CSV" colspan="4"/>
+                        <group>                 
+                            <field name="datapac_csv"/>
+                        </group>
+					</page>
+				</notebook>
+			</field>
+		</record>
+	</data>
+	
+    <data noupdate="1">
+        <!--  Cron : CHecker of new Status in Tracking_numbers to Send Emails about updates -->
+        
+       <record id="ir_cron_email_status_tracking_ref" model="ir.cron">
+            <field name="name">Check New Status in Tracking Numbers and Email Updates</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">stock.picking.out</field>
+            <field name="function">check_new_state_and_email</field>
+            <field name="args">(False,)</field>
+        </record>
+
+        <!--  Cron : Create Labels which are validated by users and which does not have an exception -->
+        
+       <record id="ir_cron_email_status_tracking_ref" model="ir.cron">
+            <field name="name">Create Labels</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model">stock.picking.out</field>
+            <field name="function">cron_create_shipment_simplest</field>
+            <field name="args">(False,)</field>
+        </record>
+		
+	</data>
+</openerp>

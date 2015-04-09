@@ -1,0 +1,708 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+from datetime import datetime
+import time
+import datetime
+from openerp.osv import osv, fields
+from tools.translate import _
+from datetime import datetime
+import time
+import datetime
+import urllib
+import math
+import base64
+import cStringIO # *much* faster than StringIO
+import Image
+import base64
+from PyPDF2 import PdfFileMerger, PdfFileReader
+import os
+from pprint import pprint
+#from reportlab.lib.units import mm, inch
+#import matplotlib.pyplot as plt
+import postmaster
+
+
+class stock_picking(osv.osv):
+
+    _inherit = "stock.picking"
+    _columns = {
+
+        'shipping_carrier':fields.selection([('fedex','Fedex'),('ups','UPS'),
+                                            ('usps','USPS'),('lso','LSO'),
+                                            ('lso','LSO'),('canada_post','Canada Post')],'Shipping Carrier'),
+        'shipping_service_fedex':fields.selection([
+                                           ('GROUND', 'Ground/Home Delivery'),
+                                           ('3DAY', 'Express Saver'),
+                                           ('2DAY', '2Day'),
+                                           ('2DAY_EARLY', '2Day AM'),
+                                           ('1DAY', 'Standard Overnight'),
+                                           ('1DAY_EARLY', 'Priority Overnight'),
+                                           ('1DAY_MORNING', 'First Overnight'),
+                                           ('INTL_PRIORITY', 'International Economy'),
+                                           ('INTL_EXPRESS', 'International Priority'), 
+                                           ], 'Shipping Service Fedex'
+                                          ),
+        'shipping_service_ups':fields.selection([
+                                           ('GROUND', 'Ground'),
+                                           ('3DAY', '3 Day Select'),
+                                           ('2DAY', '2nd Day Air'),
+                                           ('2DAY_EARLY', '2nd Day Air AM'),
+                                           ('1DAY', 'Next Day Air Saver'),
+                                           ('1DAY_EARLY', 'Next Day Air'),
+                                           ('1DAY_MORNING', 'Next Day Air Early A.M.'),
+                                           ('INTL_PRIORITY', 'Worldwide Saver'),
+                                           ('INTL_EXPRESS', 'Worldwide Express'), #this option is not a magento native field it will be better to found a generic solutionto manage this kind of custom option
+                                           ], 'Shipping Service ups'
+                                          ),
+      'shipping_service_usps':fields.selection([
+                                           ('GROUND', 'Parcel Select'),
+                                           ('3DAY', 'Priority or 1st Class'),
+                                           ('2DAY', 'Priority'),
+                                           ('2DAY_EARLY', 'Express'),
+                                           ('INTL_SURFACE ', '1st Class International'),
+                                           ('INTL_PRIORITY', 'Priority International'),
+                                           ('INTL_EXPRESS', 'Express International'),
+                                           ], 'Shipping Service usps'
+                                          ),
+        'shipping_service_lso':fields.selection([
+                                           ('GROUND', 'Ground Basic'),
+                                           ('3DAY', 'Ground Early'),
+                                           ('2DAY', 'Priority Noon'),
+                                           ('2DAY_EARLY', 'Priority 2nd Day'),
+                                           ('1DAY', 'Priority Basic'),
+                                           ('1DAY_EARLY', 'Priority Early'),
+                                           ('1DAY_MORNING', 'Priority Basic'),
+                                           ], 'Shipping Service LSO'
+                                          ),
+        'shipping_packaging_fedex':fields.selection([
+                                           ('TUBE', 'Fedex Tube'),
+                                           ('LETTER', 'Fedex Envelope'),
+                                           ('PAK', 'Fedex Pak'),
+                                           ('CARRIER_BOX_SMALL', 'Fedex Small Box'),
+                                           ('CARRIER_BOX_MEDIUM', 'Fedex Medium Box'),
+                                           ('CARRIER_BOX_LARGE', 'Fedex Large Box'),
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping packaging Fedex'
+                                          ),
+        'shipping_packaging_ups':fields.selection([
+                                           ('TUBE', 'UPS Tube'),
+                                           ('LETTER', 'UPS Letter'),
+                                           ('PAK', 'UPS PAK'),
+                                           ('CARRIER_BOX_SMALL', 'UPS Small Box'),
+                                           ('CARRIER_BOX_MEDIUM', 'UPS Medium Box'),
+                                           ('CARRIER_BOX_LARGE', 'UPS Large Box'),
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping Packaging UPS'
+                                          ),
+        'shipping_service_canada_post':fields.selection([
+                                           ('GROUND', 'Regular Parcel'),
+                                           ('3DAY', 'Expedited Parcel'),
+                                           ('2DAY', 'Priority'),
+                                           ('1DAY', 'Xpresspost'),
+                                           ], 'Shipping Service Canada Post'
+                                          ),
+        'shipping_packaging_usps':fields.selection([
+                                           ('LETTER', 'Legal Envelopes'),
+                                           ('CARRIER_BOX_SMALL', 'Flat Rate Small Box'),
+                                           ('CARRIER_BOX_MEDIUM', 'Flat Rate Medium Box'),
+                                           ('CARRIER_BOX_LARGE', 'Flat Rate Large Box'),
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping Packaging USPS'
+                                          ),
+        'shipping_packaging_lso':fields.selection([
+                                           ('TUBE', 'Tube'),
+                                           ('LETTER', 'Letter Pack'),
+                                           ('PAK', 'Lone Star Pack'),
+                                           ('CARRIER_BOX_SMALL', 'Small Cardboard Boxes'),
+                                           ('CARRIER_BOX_MEDIUM', 'Medium Cardboard Boxes'),
+                                           ('CARRIER_BOX_LARGE', 'Large Cardboard Boxes'),
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping Packaging LSO'
+                                          ),
+        'shipping_packaging_canada_post':fields.selection([
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping Packaging Canada Post'
+                                          ),
+        'total_weight':fields.char('Override Weight', size=100),
+        'batch_no':fields.char('Batch No',size=100),
+        'error_note':fields.text('Error Note'),
+        'faulty':fields.boolean('Faulty'),
+
+    }
+
+
+
+stock_picking()
+
+class stock_picking_out(osv.osv):
+    _inherit = "stock.picking.out"
+    _columns = {
+        'shipping_carrier':fields.selection([('fedex','Fedex'),('ups','UPS'),
+                                            ('usps','USPS'),('lso','LSO'),
+                                            ('canada_post','canada_post')],'Shipping Carrier'),
+        'shipping_service_fedex':fields.selection([
+                                           ('GROUND', 'Ground/Home Delivery'),
+                                           ('3DAY', 'Express Saver'),
+                                           ('2DAY', '2Day'),
+                                           ('2DAY_EARLY', '2Day AM'),
+                                           ('1DAY', 'Standard Overnight'),
+                                           ('1DAY_EARLY', 'Priority Overnight'),
+                                           ('1DAY_MORNING', 'First Overnight'),
+                                           ('INTL_PRIORITY', 'International Economy'),
+                                           ('INTL_EXPRESS', 'International Priority'), #this option is not a magento native field it will be better to found a generic solutionto manage this kind of custom option
+                                           ], 'Shipping Service Fedex'
+                                          ),
+        'shipping_service_ups':fields.selection([
+                                           ('GROUND', 'Ground'),
+                                           ('3DAY', '3 Day Select'),
+                                           ('2DAY', '2nd Day Air'),
+                                           ('2DAY_EARLY', '2nd Day Air AM'),
+                                           ('1DAY', 'Next Day Air Saver'),
+                                           ('1DAY_EARLY', 'Next Day Air'),
+                                           ('1DAY_MORNING', 'Next Day Air Early A.M.'),
+                                           ('INTL_PRIORITY', 'Worldwide Saver'),
+                                           ('INTL_EXPRESS', 'Worldwide Express'), #this option is not a magento native field it will be better to found a generic solutionto manage this kind of custom option
+                                           ], 'Shipping Service UPS'
+                                          ),
+        'shipping_service_usps':fields.selection([
+                                           ('GROUND', 'Parcel Select'),
+                                           ('3DAY', 'Priority or 1st Class'),
+                                           ('2DAY', 'Priority'),
+                                           ('2DAY_EARLY', 'Express'),
+                                           ('1DAY', 'Express'),
+                                           ('1DAY_EARLY', 'Express'),
+                                           ('1DAY_MORNING', 'Express'),
+                                           ('INTL_SURFACE ', '1st Class International'),
+                                           ('INTL_PRIORITY', 'Priority International'),
+                                           ('INTL_EXPRESS', 'Express International'), #this option is not a magento native field it will be better to found a generic solutionto manage this kind of custom option
+                                           ], 'Shipping Service USPS'
+                                          ),
+        'shipping_service_lso':fields.selection([
+                                           ('GROUND', 'Ground Basic'),
+                                           ('3DAY', 'Ground Early'),
+                                           ('2DAY', 'Priority Noon'),
+                                           ('2DAY_EARLY', 'Priority 2nd Day'),
+                                           ('1DAY', 'Priority Basic'),
+                                           ('1DAY_EARLY', 'Priority Early'),
+                                           ('1DAY_MORNING', 'Priority Basic'),
+                                           #this option is not a magento native field it will be better to found a generic solutionto manage this kind of custom option
+                                           ], 'Shipping Service LSO',
+                                          ),
+        'shipping_packaging_fedex':fields.selection([
+                                           ('TUBE', 'Fedex Tube'),
+                                           ('LETTER', 'Fedex Envelope'),
+                                           ('PAK', 'Fedex Pak'),
+                                           ('CARRIER_BOX_SMALL', 'Fedex Small Box'),
+                                           ('CARRIER_BOX_MEDIUM', 'Fedex Medium Box'),
+                                           ('CARRIER_BOX_LARGE', 'Fedex Large Box'),
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping packaging Fedex'
+                                          ),
+        'shipping_packaging_ups':fields.selection([
+                                           ('TUBE', 'UPS Tube'),
+                                           ('LETTER', 'UPS Letter'),
+                                           ('PAK', 'UPS PAK'),
+                                           ('CARRIER_BOX_SMALL', 'UPS Small Box'),
+                                           ('CARRIER_BOX_MEDIUM', 'UPS Medium Box'),
+                                           ('CARRIER_BOX_LARGE', 'UPS Large Box'),
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping Packaging UPS'
+                                          ),
+        'shipping_service_canada_post':fields.selection([
+                                           ('GROUND', 'Regular Parcel'),
+                                           ('3DAY', 'Expedited Parcel'),
+                                           ('2DAY', 'Priority'),
+                                           ('1DAY', 'Xpresspost'),
+                                           ], 'Shipping Service canada_post'
+                                          ),
+        'shipping_packaging_usps':fields.selection([
+                                           ('LETTER', 'Legal Envelopes'),
+                                           ('CARRIER_BOX_SMALL', 'Flat Rate Small Bo'),
+                                           ('CARRIER_BOX_MEDIUM', 'Flat Rate Medium Box'),
+                                           ('CARRIER_BOX_LARGE', 'Flat Rate Large Box'),
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping Packaging USPS'
+                                          ),
+        'shipping_packaging_lso':fields.selection([
+                                           ('TUBE', 'Tube'),
+                                           ('LETTER', 'Letter Pack'),
+                                           ('PAK', 'Lone Star Pack'),
+                                           ('CARRIER_BOX_SMALL', 'Small Cardboard Boxes'),
+                                           ('CARRIER_BOX_MEDIUM', 'Medium Cardboard Boxes'),
+                                           ('CARRIER_BOX_LARGE', 'Large Cardboard Boxes'),
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping Packaging LSO'
+                                          ),
+        'shipping_packaging_canada_post':fields.selection([
+                                           ('CUSTOM', 'Customer Supplied Package'),
+                                           ], 'Shipping Packaging canada_post'
+                                          ),
+        'total_weight':fields.char('Override Weight', size=100),
+
+        'batch_no':fields.char('Batch No',size=100),
+        'error_note':fields.text('Error Note'),
+        'faulty':fields.boolean('Faulty'),
+    }
+    
+    def packaging_product(self, cr, uid, ids, context=None):
+        move_obj = self.pool.get('stock.move')
+        pick_obj = self.browse(cr, uid, ids[0], context=None)
+        for pick in pick_obj.move_lines:
+            if pick.product_id.packaging:
+                p_qty = pick.product_id.packaging[0].qty
+                if p_qty < pick.product_qty:
+                    p_t_qty = pick.product_qty/p_qty
+                    p_r_qty = pick.product_qty%p_qty
+                    for i in range(int(p_t_qty)):
+                        move_id = move_obj.copy(cr, uid, pick.id)
+                        move_obj.write(cr, uid, move_id, {'product_qty': p_qty})
+                    move_obj.write(cr, uid, pick.id, {'product_qty': p_r_qty})
+        return True
+
+#    def packaging_product(self, cr, uid, ids, context=None):
+#        stock_obj=self.pool.get('stock.tracking')
+#        move_obj = self.pool.get('stock.move')
+#        (data,)=self.browse(cr,uid,ids)
+#        count=0
+#        update_same=True
+#        today=datetime.date.today()
+#        for i in data.move_lines:
+#            print "******",i
+#            if not i.product_id.packaging:
+#                continue
+#            
+#            package=i.product_id.packaging[0].qty
+#            if package > i.product_qty:
+#                continue
+#            else:
+#                print i.product_qty,package
+#                t=i.product_qty/package
+#                print "====",t,int(round(t))
+#                s=i.product_qty%package
+#                print'sssssssssssssssss', s
+#                print'tttttttttttt', t
+#
+#                if s > 0.0 :
+#                    p=int(math.ceil(t))
+##                    p=abs(t)+1
+#                else:
+#                    p=int(math.ceil(t))
+#                print"--ppp--", p
+#
+#                order_qty=i.product_qty
+#                pack_qty=i.product_id.packaging[0].qty
+#                print "===",count
+#                
+#                while p != count:
+#                    print"i m innnn"
+#                    count=count+1
+#                    print 'count', i.origin,count
+#                    tracking_id=stock_obj.create(cr,uid,{'name':i.origin+'_'+str(count),'date':today})
+#                    order_qty = 1
+#                    if order_qty > pack_qty:
+#                        order_qty = order_qty - pack_qty
+#                        move_qty = pack_qty
+#                    else:
+#                        move_qty = order_qty
+#
+#                    
+#                    print'package-----package',i.product_id.packaging[0].qty
+#                    print'move_qty-----move_qty',move_qty
+#                    if order_qty >= pack_qty and update_same:
+#                        update_same= False
+#                        move_obj.write(cr, uid, [i.id], {'product_qty': move_qty,'tracking_id': tracking_id}, context=context)
+#                    else:
+#                        default_val = {
+#                            'product_qty': move_qty,
+#                            'product_uos_qty': move_qty,
+#                            'tracking_id': tracking_id,
+#                            'state': i.state,
+#                            'product_uos': i.product_uom.id
+#                            }
+#                        current_move = move_obj.copy(cr, uid, i.id, default_val, context=context)
+##        (data,)=self.browse(cr,uid,ids)
+##        print"=====",data.move_lines
+##        print"+++++++++++=", data.move_lines[0].id
+##        update=move_obj.unlink(cr,uid,[data.move_lines[0].id])
+#
+##                    val={
+##                        'product_id':i.product_id.id,
+##                        'product_qty':q,
+##                        'product_uom':i.product_uom.id,
+##                        'name':i.name,
+##                        'location_dest_id':i.location_dest_id.id,
+##                        'date_expected':i.date_expected,
+##                        'location_id':i.location_id.id,
+##                        'tracking_id':stock_id,
+##                        'picking_id':i.picking_id.id
+##                    }
+##                    print i.id
+##
+###                    update=move_obj.unlink(cr,uid,i.id)
+##                    product_id=move_obj.create(cr,uid,val)
+#
+#        return True
+    
+    def create_shipment_simplest(self, cr, uid, ids, context=None):
+        postmaster.config.api_key = 'tt_NjIxMDAxOndJc2kweENoM0hOVnpfU0g1dl90X280TUJPYw'
+        sale_obj= self.pool.get('sale.order')
+        attach_object=self.pool.get('
+ir.attachment')
+        product_object=self.pool.get('product.product')
+        carrier_obj=self.pool.get('delivery.carrier')
+#        print "============>",context
+        for data in self.browse(cr,uid,ids):
+            packages=[]
+            print "===========>",data.shipping_carrier
+            if not data.shipping_carrier:
+                if context.get('From_wizard_lable'):
+                    data.write({'faulty':True, 'error_note':'Please Enter the Shipping Carrier for order'})
+                else:
+                    raise osv.except_osv(_('Error!'),  _('Please Enter the Shipping Carrier for order  %s' % (data.name)))
+    #            raise osv.except_osv(_('Error!'),  _('Please Enter the Shipping Carrier'))
+            if data.shipping_carrier == 'fedex':
+                carrier='fedex'
+                if not data.shipping_service_fedex:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note':'Please Enter the Shipping service'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter the Shipping service  for %s' % (data.name)))
+                if not data.shipping_packaging_fedex:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Select the Packaging'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Select the Packaging for %s' % (data.name)))
+                packaging = data.shipping_packaging_fedex
+                service=data.shipping_service_fedex
+            elif data.shipping_carrier=='usps':
+                carrier='usps'
+                if not data.shipping_service_usps:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter the Shipping service'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter the Shipping service for  %s' % (data.name)))
+                if not data.shipping_packaging_usps:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note':'Please Select the Packaging'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Select the Packaging for %s' % (data.name)))
+                packaging = data.shipping_packaging_usps
+                service=data.shipping_service_usps
+            elif data.shipping_carrier=='lso':
+                carrier='lso'
+                if not data.shipping_service_lso:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter the Shipping service'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter the Shipping service for %s' % (data.name)))
+                if not data.shipping_packaging_lso:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Select the Packaging'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Select the Packaging for %s' % (data.name)))
+                packaging = data.shipping_packaging_lso
+                service=data.shipping_service_lso
+            elif data.shipping_carrier=='canada_post':
+                carrier='canada_post'
+                if not data.shipping_service_canada_post:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note':'Please Enter the Shipping service'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter the Shipping service for %s' % (data.name)))
+                if not data.shipping_packaging_canada_post:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note':'Please Select the Packaging'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Select the Packaging for %s' % (data.name)))
+                packaging = data.shipping_packaging_canada_post
+                service=data.shipping_service_canada_post
+            else:
+                carrier='ups'
+                if not data.shipping_service_ups:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter the Shipping service'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter the Shipping service for %s' % (data.name)))
+                if not data.shipping_packaging_ups:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Select the Packaging'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Select the Packaging for %s' % (data.name)))
+                packaging = data.shipping_packaging_ups
+                service= data.shipping_service_ups
+
+            for move in data.move_lines:
+                if not move.product_id.packaging:
+                    if move.product_id.weight and move.product_id.lenght and move.product_id.width and move.product_id.height:
+                         p={
+                            'type' :packaging,
+                            'weight': move.product_id.weight,
+                            'length': move.product_id.lenght,
+                            'width': move.product_id.width,
+                            'height': move.product_id.height,
+                          }
+                         packages.append(p)
+                         p={}
+                    else:
+                        if context.get('From_wizard_lable'):
+                            data.write({'faulty':True, 'error_note': 'Please Enter the product height,width,lenght,weight'})
+                        else:
+                            raise osv.except_osv(_('Error!'),  _('Please Enter the product height,width,lenght,weight'))
+                else:
+                    height = False
+                    if move.product_id.packaging[0].height:
+                        height=move.product_id.packaging[0].height
+                    else:
+                        if context.get('From_wizard_lable'):
+                            data.write({'faulty':True, 'error_note': 'Please Enter the package height in product'})
+                        else:
+                            raise osv.except_osv(_('Error!'),  _('Please Enter the package height in product %s' % (data.name)))
+                    length = False
+                    if move.product_id.packaging[0].length:
+                        length=move.product_id.packaging[0].length
+                    else:
+                        if context.get('From_wizard_lable'):
+                            data.write({'faulty':True, 'error_note': 'Please Enter the package length in product'})
+                        else:
+                            raise osv.except_osv(_('Error!'),  _('Please Enter the package length in product %s' % (data.name)))
+                    width = False
+                    if move.product_id.packaging[0].width:
+                        width=move.product_id.packaging[0].width
+                    else:
+                        if context.get('From_wizard_lable'):
+                            data.write({'faulty':True, 'error_note': 'Please Enter the package width in product'})
+                        else:
+                            raise osv.except_osv(_('Error!'),  _('Please Enter the package width in product %s' % (data.name)))
+                    print'move.product_id.packaging[0].weight',move.product_id.packaging[0].weight
+                    weight = False
+                    if move.product_id.packaging[0].weight:
+                        weight=move.product_id.packaging[0].weight
+                    else:
+                        if context.get('From_wizard_lable'):
+                            data.write({'faulty':True, 'error_note': 'Please Enter the package weight in product'})
+                        else:
+                            raise osv.except_osv(_('Error!'),  _('Please Enter the package weight in product %s' % (data.name)))
+                    p={
+                        'type' :packaging,
+                        'weight': weight,
+                        'length': length,
+                        'width': width,
+                        'height': height,
+                        }
+                    packages.append(p)
+                    p={}
+                print packages
+
+            if data.origin:
+                sale_id=sale_obj.search(cr,uid,[('name','=',data.origin)])
+                print sale_id
+                sale_data=sale_obj.browse(cr,uid,sale_id)
+
+                if not sale_data[0].shop_id:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter the Shop'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter the Shop %s' % (data.name)))
+
+                if not sale_data[0].shop_id.company_id.phone:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter Phone number For Sender'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter Phone number For Sender  %s' % (data.name)))
+                if not data.partner_id.phone:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter Phone number For Receipent'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter Phone number For Receipent %s' % (data.name)))
+
+                if not data.partner_id.street:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter street For Receipent'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter street For Receipent %s' % (data.name)))
+                if not sale_data[0].shop_id.company_id.street:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter street For Sender'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter street For Sender  %s' % (data.name)))
+
+
+                if not sale_data[0].shop_id.company_id.city:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter City For Sender'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter City For Sender  %s' % (data.name)))
+                if not data.partner_id.city:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter city For Receipent'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter city For Receipent  %s' % (data.name)))
+
+                if not sale_data[0].shop_id.company_id.state_id:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter state For Sender'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter state For Sender  %s' % (data.name)))
+
+                if not data.partner_id.state_id:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter State For Receipent'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter State For Receipent  %s' % (data.name)))
+
+                if not sale_data[0].shop_id.company_id.zip:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter zip For Sender'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter zip For Sender  %s' % (data.name)))
+                if not data.partner_id.zip:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note': 'Please Enter zip For Receipent'})
+                    else:
+                        raise osv.except_osv(_('Error!'),  _('Please Enter zip For Receipent  %s' % (data.name)))
+
+    #            try:
+#                print"====>>",sale_data[0].shop_id.company_id.phone
+                to={
+                    'company':data.partner_id.name,
+                    'contact': data.partner_id.name,
+                    'line1': data.partner_id.street,
+                    'line2': data.partner_id.street2 or '',
+                    'city': data.partner_id.city,
+                    'state': data.partner_id.state_id.code,
+                    'zip_code': data.partner_id.zip,
+                    'phone_no': data.partner_id.phone,
+                }
+                packages=packages
+                carrier=str(carrier)
+                service=service
+                from_={
+                    'contact': sale_data[0].shop_id.company_id.name,
+                    'line1': sale_data[0].shop_id.company_id.street,
+                    'city': sale_data[0].shop_id.company_id.city,
+                    'state': sale_data[0].shop_id.company_id.state_id.code,
+                    'zip_code': sale_data[0].shop_id.company_id.zip,
+                    'phone_no': sale_data[0].shop_id.company_id.phone,
+                    }
+
+                try:
+                    shipment = postmaster.Shipment.create(to=to,packages=packages,carrier=carrier,service=service,from_=from_,)
+#                    pprint(shipment._data)
+                    print  "=====shipment====>",shipment._data
+                    count=0
+                    name_label=[]
+                    image_url=False
+                    print'*********shipment.packages',shipment.packages
+                    for label in shipment.packages:
+                        image_url="https://www.postmaster.io"+label.get('label_url')
+                        print "====>",image_url
+                        if image_url:
+                            a_id = attach_object.create(cr, uid, {'name': 'Label', 'res_model': 'stock.picking.out', 'res_id': ids[0],'type': 'url', 'url': image_url})
+                            data.write({'faulty':False, 'error_note':False})
+                    carr_ids = carrier_obj.search(cr, uid, [('name','=',shipment.carrier)])
+                    carrier_code = shipment.carrier
+
+                    if carr_ids:
+                        c_id = carr_ids[0]
+                        #carrier_obj.write(cr, uid, c_id,{'metapack_carrier_code': carrier_code})
+                    else:
+                        prod_ids = product_object.search(cr, uid, [('type', '=','service')])
+                        if prod_ids:
+                            p_id  = prod_ids[0]
+                        else:
+                            p_id  = product_object.create(cr, uid, {'name': 'Shipping and Handling', 'type':"service" ,'categ_id': 1})
+            #            patner_id = partner_object.create(cr, uid, {'name': shipment.carrier})
+                        c_id = carrier_obj.create(cr, uid, {'name': shipment.carrier , 'metapack_carrier_code':carrier_code, 'product_id': p_id,'partner_id': sale_data[0].shop_id.company_id.id})
+                    self.write(cr,uid,ids,{'carrier_tracking_ref':shipment.tracking[0],'carrier_id':c_id})
+                    self.do_partial(cr, uid, ids, context=None)
+                except Exception, e:
+                    if context.get('From_wizard_lable'):
+                        data.write({'faulty':True, 'error_note':str(e)})
+                    else:
+                        self.write(cr,uid,ids,{'faulty':True,'error_note':e})
+                        raise osv.except_osv(('Error !'), ('%s') % (e))
+
+                
+
+                '''for label in shipment.packages:
+                    print"===", label.get('label_url')
+                    count+=1
+                    image_url="https://www.postmaster.io"+label.get('label_url')
+                    file_n = "/var/www/postmaster/label_"+str(count)+('_')+str(shipment.tracking[0])+".png"
+
+                    file = urllib.urlopen(image_url)
+                    im = cStringIO.StringIO(file.read())
+                    img = Image.open(im)
+    #                urllib.urlretrieve(image_url, file_n)
+    #                img = Image.open(file_n)
+    #                figure = plt.gcf() # get current figure
+    #                img.drawHeight = 2*inch
+    #                img.drawWidth = 1*inch
+    #                img._restrictSize(6 * inch, 4 * inch)
+    #                im2 = img.resize((128,128),Image.ANTIALIAS)
+                    img.save("/var/www/postmaster/label_"+str(count)+('_')+str(shipment.tracking[0])+".pdf")
+                    name_label.append(str(count)+('_')+str(shipment.tracking[0])+".pdf")
+        #            file1 = "label" +str(picking.id)+".pdf"
+                print name_label
+                file1 = "/var/www/postmaster/master_"+str(shipment.tracking[0])+".pdf"
+                if os.path.exists(file1):
+                    os.remove(file1)
+                merger = PdfFileMerger()
+                #for manifest
+
+                for label in  name_label:
+                    print"labelssss------"
+                    child_pdf_file= "/var/www/postmaster/label_"+label
+                    print child_pdf_file
+                    merger.append(PdfFileReader(file(child_pdf_file, 'rb')))
+                merger.write(file1)'''
+    #            f=open("/var/www/master.pdf", 'rb')
+                
+        return True
+
+    def do_partial(self, cr, uid, ids, context=None):
+        # no call to super!
+        stock_pick_obj=self.pool.get('stock.picking')
+        assert len(ids) == 1, 'Partial move processing may only be done one form at a time.'
+        print ids
+        partial = stock_pick_obj.browse(cr, uid, ids[0], context=context)
+        print partial
+        partial_data = {
+            'delivery_date' : partial.date
+        }
+        print partial.move_lines
+        moves_ids = []
+        for move in partial.move_lines:
+            move_id = move.id
+            partial_data['move%s' % (move_id)] = {
+                'product_id': move.product_id.id,
+                'product_qty': move.product_qty,
+                'product_uom': move.product_uom.id,
+#                'prodlot_id': move.prodlot_id.id,
+            }
+            moves_ids.append(move_id)
+            if (move.picking_id.type == 'in') and (move.product_id.cost_method == 'average'):
+                partial_data['move%s' % (move_id)].update(product_price=move.cost,
+                                                          product_currency=move.currency.id)
+        self.pool.get('stock.move').do_partial(cr, uid,  moves_ids, partial_data, context=context)
+        return True
+
+stock_picking_out()

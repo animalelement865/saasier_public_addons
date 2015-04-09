@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        
+   <!--     <report 
+            auto="False" 
+            id="report_webkit" 
+            model="stock.picking.out"
+            name="webkit.html"
+            file="shipping_postmaster/report/report_webkit.mako"
+            string="Label-Packinglist"
+            report_type="webkit" /> -->
+        
+<report auto="False" multi="1" id="label_generate_new" model="stock.picking.out.label" name="label.generate" rml="saasier_shipping/report/label_generate.rml" string="Duplex Pack Slip" header="False"/>
+<report auto="False" multi="1" id="label_generate_thermal_label" model="stock.picking.out.label" name="label.generate.thermal.label" rml="saasier_shipping/report/label_generate_thermal_label.rml" string="Thermal Label" header="False"/>
+
+<!--<report auto="False" id="label_generate_3" model="stock.picking.out" name="label.generate.3" rml="shipping_postmaster/report/label_generate_3.rml" string="Label Two" header="False"/>-->       
+        
+        
+    </data>
+</openerp>

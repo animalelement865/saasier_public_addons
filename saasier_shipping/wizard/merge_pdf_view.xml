@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_merge_pdf" model="ir.ui.view">
+            <field name="name">Merge Pdf</field>
+            <field name="model">merge.pdf</field>
+            <field name="arch" type="xml">
+                <form string="Merge Pdf" version="7.0">
+                    <group>
+                        <button name="merge_pdf" string="Merge Pdf" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+   <!-- comment by 4devnet     <act_window name="Merge Pdf original"
+            res_model="merge.pdf"
+            src_model="stock.picking.out"
+            key2="client_action_multi" 
+            multi="True"
+            view_mode="form"
+            view_type="form"
+            target="new"
+            id="action_merge_pdf"/> -->
+
+    </data>
+</openerp>

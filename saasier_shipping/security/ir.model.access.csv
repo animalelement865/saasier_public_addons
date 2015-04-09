@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+shipping_calculator dfw access,shipping.calculator dfw portal access,saasier_shipping.model_shipping_calculator,,1,1,1,1
+box_setup dfw access,box.setup dfw portal access,saasier_shipping.model_box_setup,,1,1,1,1
+shipping label user access, shipping.label user access,saasier_shipping.model_stock_picking_out_label,stock.group_stock_user,1,0,0,0
+shipping label manager access, shipping.label manager access,saasier_shipping.model_stock_picking_out_label,stock.group_stock_user,1,1,1,1
+

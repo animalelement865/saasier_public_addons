@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_normal_form_view_for_pack" model="ir.ui.view">
+            <field name="name">product.normal.form.for.pack</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+				<page string="Sales" position="after">
+					<page string="Packaging">
+						<separator string="Packaging"/>
+							<group>
+                                <field name="packaging" nolabel="1" groups="product.group_stock_packaging">
+                                    <form string="Packaging" version="7.0">
+                                        <group col="4">
+                                            <field name="ean"/>
+                                            <field name="sequence" invisible="1"/>
+                                            <newline/>
+                                            <field name="qty"/>
+                                            <field name="box_setup_id"/>
+                                            <!-- <field name="ul"/> -->
+                                            <!-- <field name="weight_ul"/> -->
+                                            <separator colspan="4" string="Palletization"/>
+                                            <field name="ul_qty"/>
+                                            <field name="rows"/>
+                                            <field name="weight"/>
+                                            <separator colspan="4" string="Pallet Dimension"/>
+                                            <field name="height"/>
+                                            <field name="width"/>
+                                            <field name="length"/>
+                                        </group>
+                                        <separator colspan="4" string="Description"/>
+                                        <field name="name"/>
+                                    </form>
+								</field>
+							</group>
+					</page>
+				</page>
+            </field>
+        </record>
+
+    </data>
+</openerp>

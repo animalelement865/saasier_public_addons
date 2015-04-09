@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.0 Transitional//EN”>
+<html>
+<head>
+    <style type="text/css">
+       .ups-image {
+            border-width: 0px;
+            border-color: #ffffff;
+            border-style: solid;
+            background-position:0% 12%;
+            background-repeat:no-repeat;
+            background-size:115% 100%;
+            }
+
+            .usps-image {
+            border-width: 0px;
+            border-color: #ffffff;
+            border-style: solid;
+            background-position:0% 0%;
+            background-repeat:no-repeat;
+            background-size:100% 100%;
+            }
+            .rotate {
+                    position:relative;/* place the text relateve to whatever tag is devined as absolute */
+                    -webkit-transform: rotate(-90deg);
+                    min-height:210 mm;
+                    margin:0 auto;
+               		
+            }
+          
+           
+    </style>
+</head>
+<body>
+
+    %for picking in objects :
+          <% setLang(picking.partner_id.lang) %>
+          %for image in get_label(picking) :
+            <div class="rotate">
+                <center>
+                <img src=${str(image.url)} alt="logo"  />
+                <center>
+            </div>
+            <table height=310>
+                	<tr>
+                		<td>
+                		</td>
+                	</tr>
+                </table>
+      
+            <div style="min-height:210 mm;">
+            <center>
+            <table width="900" border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td colspan="5" align="right">Packing Slip</td>
+                    
+                </tr>
+                <tr>    
+                    <td colspan="2">
+                           ${picking.company_id.name}</br>
+                           ${picking.company_id.partner_id.street}</br>
+                           ${picking.company_id.partner_id.city}</br>
+                           ${picking.company_id.partner_id.zip}</br>
+                           ${picking.company_id.partner_id.state_id.name}</br>
+                           ${picking.company_id.partner_id.country_id.name}
+                     </td>
+                    
+                     <td colspan="3">
+                            ${picking.partner_id.name}</br>
+                            ${picking.partner_id.street}</br>
+                            ${picking.partner_id.city}</br>
+                            ${picking.partner_id.zip}</br>
+                            ${picking.partner_id.state_id.name}</br>
+                            ${picking.partner_id.country_id.name}
+                    </td>
+                       
+                </tr>
+                <tr bgcolor="white">
+                    <td align="center"><font color="black">Product/Part No.</font></td>
+                    <td align="center"><font color="black">Qty</font></td>
+                    <td align="center"><font color="black">Ship</font></td>
+                    <td align="center"><font color="black">Price</font></td>
+                    <td align="center"><font color="black">Extended</font></td>                    
+                </tr>
+                 %for move in get_move_lines(picking) :
+                 <tr bgcolor="white">
+                    <td><font color="black">${move.product_id.name}</font></td>
+                    <td><font color="black">${move.product_qty}</font></td>
+                    <td><font color="black">${move.prodlot_id.name}</font></td>
+                    <td><font color="black">${move.price_unit}</font></td>
+                    <td><font color="black">Extended</font></td>
+                </tr>
+                 %endfor
+                </table>
+                </div>
+               <p style="page-break-after:auto"></p>
+    %endfor
+%endfor  
+
+</body>
+</html>

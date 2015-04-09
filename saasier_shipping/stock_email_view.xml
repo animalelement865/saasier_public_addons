@@ -1,0 +1,171 @@
+<?xml version="1.0" ?>
+<openerp>
+
+  
+<!--  <data>
+      <record id="view_picking_form_email_button" model="ir.ui.view">
+            <field name="name">stock.picking.form.email.button</field>
+            <field name="model">stock.picking.out</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/header//button[@name='button_cancel']" position="after">
+                    <button name="send_email_tracking" string="Send Tracking Email" type="object"  groups="base.group_sale_manager,base.group_user" states="draft,confirmed,assigned"/>
+                </xpath> 
+            </field>
+        </record>
+        
+    </data> -->
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+		 
+		 
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_edi_stock_picking_tracker" model="email.template">
+            <field name="name">Tracking Number Created</field>
+            <field name="email_from">${(object.company_id.partner_id.email or '')|safe}</field>
+            <field name="reply_to">${(object.company_id.email or '')|safe}</field>
+            <field name="subject">${object.company_id.name} -  Tracking Number (Ref ${object.name or 'n/a' })</field>
+            <field name="email_recipients">${object.partner_id.id}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="stock.model_stock_picking_out"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+
+    <p>Hello ${object.partner_id.name},</p>
+    
+    <p>Thank you for placing your order with ${object.company_id.name}. Your order has shipped via ${object.shipping_carrier} and here is the list of tracking numbers and Order Details : </p>
+
+    <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+       &nbsp;&nbsp;<strong>Packages' Tracking Numbers :</strong><br />
+        % for move in object.move_lines:
+           &nbsp;&nbsp;<strong>  -   ${move.carrier_tracking_ref} [ URL : ${move.url_tracking_ref} ].</strong> <br/>
+        % endfor
+    </p>
+
+    <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+       &nbsp;&nbsp;<strong>Order Reference and Details:</strong><br />
+       &nbsp;&nbsp;Order number: <strong>${object.name}</strong><br />
+       &nbsp;&nbsp;Order date: <strong> ${object.date}</strong><br />
+       % if object.origin:
+       &nbsp;&nbsp;Order reference: <strong>${object.origin}</strong><br />
+       % endif
+    </p>
+
+    <br/>
+    <p>If you have any question, do not hesitate to contact us.</p>
+    <p>Thank you!</p>
+    <br/>
+    <br/>
+    <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+        <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+            <strong style="text-transform:uppercase;">${object.company_id.name}</strong></h3>
+    </div>
+    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+        <span style="color: #222; margin-bottom: 5px; display: block; ">
+        % if object.company_id.street:
+            ${object.company_id.street}<br/>
+        % endif
+        % if object.company_id.street2:
+            ${object.company_id.street2}<br/>
+        % endif
+        % if object.company_id.city or object.company_id.zip:
+            ${object.company_id.zip} ${object.company_id.city}<br/>
+        % endif
+        % if object.company_id.country_id:
+            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
+        % endif
+        </span>
+        % if object.company_id.phone:
+            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                Phone:&nbsp; ${object.company_id.phone}
+            </div>
+        % endif
+        % if object.company_id.website:
+            <div>
+                Web :&nbsp;<a href="${object.company_id.website}">${object.company_id.website}</a>
+            </div>
+        %endif
+        <p></p>
+    </div>
+</div>
+            ]]></field>
+        </record>
+
+        <record id="email_template_edi_stock_picking_tracker_update_status" model="email.template">
+            <field name="name">Tracking Number Updated</field>
+            <field name="email_from">${(object.company_id.partner_id.email or '')|safe}</field>
+            <field name="reply_to">${(object.company_id.email or '')|safe}</field>
+            <field name="subject">${object.company_id.name} - Picking Label Status Updated (Ref ${object.name or 'n/a' })</field>
+            <field name="email_recipients">${object.partner_id.id}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="stock.model_stock_picking_out"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+
+    <p>Hello ${object.partner_id.name},</p>
+    
+    <p>Here is some new changes in the status of your order placed with ${object.company_id.name}, which was shipped previously via ${object.shipping_carrier}.<br />
+    And here is the list of new tracking numbers' status : </p>
+
+    <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+       &nbsp;&nbsp;<strong>Packages' Tracking Numbers :</strong><br />
+        % for move in object.move_lines:
+           &nbsp;&nbsp;<strong>  -   ${move.carrier_tracking_ref} [ URL : ${move.url_tracking_ref} ].</strong> <br/>
+        % endfor
+    </p>
+
+    <p style="border-left: 1px solid #8e0000; margin-left: 30px;">
+       &nbsp;&nbsp;<strong>Order Reference and Details:</strong><br />
+       &nbsp;&nbsp;Order number: <strong>${object.name}</strong><br />
+       &nbsp;&nbsp;Order date: <strong> ${object.date}</strong><br />
+       % if object.origin:
+       &nbsp;&nbsp;Order reference: <strong>${object.origin}</strong><br />
+       % endif
+    </p>
+
+    <br/>
+    <p>If you have any question, do not hesitate to contact us.</p>
+    <p>Thank you!</p>
+    <br/>
+    <br/>
+    <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+        <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+            <strong style="text-transform:uppercase;">${object.company_id.name}</strong></h3>
+    </div>
+    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+        <span style="color: #222; margin-bottom: 5px; display: block; ">
+        % if object.company_id.street:
+            ${object.company_id.street}<br/>
+        % endif
+        % if object.company_id.street2:
+            ${object.company_id.street2}<br/>
+        % endif
+        % if object.company_id.city or object.company_id.zip:
+            ${object.company_id.zip} ${object.company_id.city}<br/>
+        % endif
+        % if object.company_id.country_id:
+            ${object.company_id.state_id and ('%s, ' % object.company_id.state_id.name) or ''} ${object.company_id.country_id.name or ''}<br/>
+        % endif
+        </span>
+        % if object.company_id.phone:
+            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                Phone:&nbsp; ${object.company_id.phone}
+            </div>
+        % endif
+        % if object.company_id.website:
+            <div>
+                Web :&nbsp;<a href="${object.company_id.website}">${object.company_id.website}</a>
+            </div>
+        %endif
+        <p></p>
+    </div>
+</div>
+            ]]></field>
+        </record>
+    </data>
+</openerp>
