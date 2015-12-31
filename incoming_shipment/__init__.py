@@ -19,12 +19,7 @@
 #
 ##############################################################################
 
-import stock
-import wizard
-import report
-import product
-import res_config
-import failed_mail_sent
 
-#import scheduler
+import report
+import stock_custom
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

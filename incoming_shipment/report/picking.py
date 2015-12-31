@@ -19,12 +19,23 @@
 #
 ##############################################################################
 
-import stock
-import wizard
-import report
-import product
-import res_config
-import failed_mail_sent
+import time
+from openerp.report import report_sxw
+from openerp.osv import osv
+from openerp import pooler
 
-#import scheduler
+class picking_2(report_sxw.rml_parse):
+    def __init__(self, cr, uid, name, context):
+        super(picking_2, self).__init__(cr, uid, name, context=context)
+        self.localcontext.update({
+            'time': time,
+            'get_product_desc':self.get_product_desc
+        })
+    def get_product_desc(self,move_line):
+        desc = move_line.product_id.name
+        if move_line.product_id.default_code:
+            desc = '[' + move_line.product_id.default_code + ']' + ' ' + desc
+        return desc
+
+report_sxw.report_sxw('report.stock.stock.picking.list.2','stock.picking','saasier_addons/incoming_shipment/report/picking.rml',parser=picking_2)
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

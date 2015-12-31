@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    	
+	<!--<report id="report_incoming_ship1" 
+	        model="stock.picking.in" 
+	        name="picking.incoming.ship1" 
+			string="Receipt Slip Custom-2" 
+			rml="incoming_ship_4devnet/report/print_incoming.rml"/>-->
+
+	<report id="report_picking_incoming" 
+	        model="stock.picking.in" 
+	        name="picking.incoming" 
+			string="Receipt Slip Custom" 
+			xsl="incoming_ship_4devnet/report/print_label.xsl"/>
+    
+
+	</data>
+</openerp>

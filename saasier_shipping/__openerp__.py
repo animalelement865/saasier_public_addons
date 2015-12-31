@@ -2,7 +2,7 @@
     "name" : "saasier_shipping",
     "version" : "1.0",
   
-    "author" : "Chris Jones",
+    "author" : "Chris Jhons",
     "description": """Shipping Module""",
     "website" : "www.saasier.com",
     "category" : " ",
@@ -19,6 +19,7 @@
        "report_view.xml",
        "product_view.xml",
        "res_config_view.xml",
+       "fail_mail_scheduler_view.xml",
     ],
     "installable": True,
     "auto_install": False,

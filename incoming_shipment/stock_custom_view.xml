@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+    	<record id="view_move_form_shipment" model="ir.ui.view">
+            <field name="name">view.move.form.shipment</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_form" />
+            <field name="arch" type="xml">                  
+           	<field name="product_id" on_change="onchange_product_id(product_id,location_id,location_dest_id, False)" position="after">
+            	 <field name="qr_code"/>
+            	 <field name="err_correction"/>
+            	 <newline/>
+            	 	<button name="generate_image" string="Generate Barcode Image" type="object" colspan="2" />
+                 <newline/>
+                 <field name="qr_img" widget="image" readonly="1"/>
+            </field>
+            </field>
+        </record>	
+
+        <record id="stock_move_tree_shipment" model="ir.ui.view">
+            <field name="name">stock.move.tree.shipment</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree" />
+            <field name="arch" type="xml">                  
+            <field name="product_id" position="after">
+            	 <field name="qr_code" />
+            </field>
+            </field>
+        </record>	
+
+
+	<report id="stock.report_picking_list_in" model="stock.picking.in" name="stock.stock.picking.list.2" string="Receipt Slip" rml="incoming_shipment/report/picking.rml"/>
+    
+
+	<record id="view_location_form_inherit" model="ir.ui.view">
+            <field name="name">stock.location.form.inherit</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form" />
+			<field name="arch" type="xml">
+				<field name="active" position="after">
+			<!--		<field name="qr_code"/> -->
+					<field name="err_correction"/>
+					<newline/>
+                 	<button name="generate_image_stock" string="Generate Qr Image" type="object" icon="gtk-go-forward" colspan="2"/>
+                 	<newline/>
+					<field name="location_qr_img" widget="image"/>
+				</field>						
+			</field>
+	</record>
+	</data>
+</openerp>

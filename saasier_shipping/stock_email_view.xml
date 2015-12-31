@@ -23,7 +23,7 @@
         <!--Email template -->
         <record id="email_template_edi_stock_picking_tracker" model="email.template">
             <field name="name">Tracking Number Created</field>
-            <field name="email_from">${(object.company_id.partner_id.email or '')|safe}</field>
+            <field name="email_from">${(object.company_id.email or '')|safe}</field>
             <field name="reply_to">${(object.company_id.email or '')|safe}</field>
             <field name="subject">${object.company_id.name} -  Tracking Number (Ref ${object.name or 'n/a' })</field>
             <field name="email_recipients">${object.partner_id.id}</field>
@@ -96,7 +96,7 @@
 
         <record id="email_template_edi_stock_picking_tracker_update_status" model="email.template">
             <field name="name">Tracking Number Updated</field>
-            <field name="email_from">${(object.company_id.partner_id.email or '')|safe}</field>
+            <field name="email_from">${(object.company_id.email or '')|safe}</field>
             <field name="reply_to">${(object.company_id.email or '')|safe}</field>
             <field name="subject">${object.company_id.name} - Picking Label Status Updated (Ref ${object.name or 'n/a' })</field>
             <field name="email_recipients">${object.partner_id.id}</field>

@@ -49,6 +49,8 @@
 
                     <field name="error_note" groups="base.group_sale_manager,base.group_user"/>
                     <field name="faulty" groups="base.group_sale_manager,base.group_user"/>
+                    <field name="faulty" groups="base.group_sale_manager,base.group_user"/>
+					<field name="progress_created_labels" widget='progressbar'/>
                 </xpath>
                 
                 <button name="draft_force_assign" position="replace">
@@ -294,6 +296,9 @@
 					<field name="two_days_old" invisible="1"/>
 					<field name="seven_days_old" invisible="1"/>
 				</tree>
+				<field name="state" position="before">
+					<field name="progress_created_labels" widget='progressbar'/>
+				</field>
 			</field>
         </record>
 
@@ -546,9 +551,8 @@
                     <field name="date"/>
                     <field name="picking_ids"/>
                     <field name="location_id"/>
+					<field name="progress_created_labels" widget='progressbar'/>
                     <field name="state"/>
-                    <field name="is_label_created"/>
-                    <field name="is_label_printed"/>
                 </tree>
             </field>
         </record>
@@ -566,8 +570,9 @@
 					</header>
 					<sheet>
 						<group>
-								<field name="is_label_created" readonly="1"/>
-								<field name="is_label_printed" readonly="1"/>
+								<field name="is_label_created" readonly="1" invisible="1"/>
+								<field name="is_label_printed" readonly="1" invisible="1"/>
+								<field name="progress_created_labels" widget='progressbar'/>
 								<field name="labels_type"/>
 								<field name="label_template_id" attrs="{'invisible':[('labels_type','not in',['Label Template'])]}" widget="selection"/>
 								<field name="date"/>

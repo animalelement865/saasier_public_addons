@@ -9,7 +9,7 @@
 #    published by the Free Software Foundation, either version 3 of the
 #    License, or (at your option) any later version.
 #
-#    This program is distributed in the hope that it will be useful,
+#    This     program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU Affero General Public License for more details.
@@ -19,12 +19,22 @@
 #
 ##############################################################################
 
-import stock
-import wizard
-import report
-import product
-import res_config
-import failed_mail_sent
+import time
+from openerp.report import report_sxw
+import locale
+from openerp.tools import amount_to_text_en
 
-#import scheduler
+
+class new_report_label(report_sxw.rml_parse):
+    
+    def __init__(self, cr, uid, name, context=None):
+        super(new_report_label, self).__init__(cr, uid, name, context=context)
+        self.localcontext.update({
+            'time': time,
+        }) 
+
+                 
+report_sxw.report_sxw('report.picking.incoming.ship1', 'stock.picking.in', 'addons/gmp_qrcode_report/report/print_incoming.rml', parser=new_report_label)
+
+
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

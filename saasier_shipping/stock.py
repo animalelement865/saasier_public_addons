@@ -21,6 +21,7 @@
 from datetime import datetime, date
 from openerp.tools.float_utils import float_compare
 import time
+from collections import Counter
 from openerp.osv import osv, fields
 from openerp import netsvc
 from tools.translate import _
@@ -369,12 +370,28 @@ class stock_picking_out_label(osv.osv):
             res[pick_label.id] =  state
         return res
     
+    def _progress_created_labels(self, cr, uid, ids, names, arg, context=None):
+        res = {}
+        for rec in self.browse(cr, uid, ids, context):
+            i = 0
+            total_progress = 0.0
+            for pick_rec in rec.picking_ids:
+                total_progress += pick_rec.progress_created_labels
+                i += 1
+            # assert False, total_progress
+            if i!=0:
+                res[rec.id] = total_progress / i
+            else:
+                res[rec.id] = 0.0
+        return res
+    
     _columns = {
         'picking_ids' : fields.many2many('stock.picking.out', 'stock_picking_label_ids', 'label_id', 'picking_id', 'Shipments', readonly=False),
         'location_id' : fields.many2one('stock.location', 'Location', readonly=True),
         'date' : fields.datetime('Creation Date', readonly=True),
         'state': fields.function(_get_label_state, type="selection", selection=state_label_selection, string='Status', store=False),
         'is_label_created': fields.boolean('Is Label Created ?'),
+        'progress_created_labels': fields.function(_progress_created_labels, string='Progress of created labels', type='float'),
         'is_label_printed': fields.boolean('Is Label Printed ?'),
         'label_template_id' : fields.many2one('ir.actions.report.xml','Label Template', domain=[('model','=','stock.picking.out.label')]),
         'labels_type' : fields.selection([('Label Template','Label Template'),('Freight','Freight'),('UPS WorldShip CSV','UPS WorldShip CSV'),('USPS DataPac CSV','USPS DataPac CSV')],'Labels Type')
@@ -454,6 +471,8 @@ class email_template(osv.osv):
         # not stored on the mail_mail, and therefore lost -> fixed in v8
         recipient_ids = []
         values['email_to'] = ''
+        #Can avoid this, by forcing the ongoing email, without setting it manually from frontend
+        #values['mail_server_id'] = 2
         email_recipients = values.pop('email_recipients', '')
         if email_recipients:
             for partner_id in email_recipients.split(','):
@@ -469,7 +488,7 @@ class email_template(osv.osv):
 
                     if email_item:
                         values['email_to'] += values['email_to'] + str(email_item) + ','
-
+        
         attachment_ids = values.pop('attachment_ids', [])
         attachments = values.pop('attachments', [])
         msg_id = mail_mail.create(cr, uid, values, context=context)
@@ -660,6 +679,9 @@ class stock_picking_out(osv.osv):
     def _get_shipping_carrier(self, cr, uid, context=None):
         return self.pool.get('stock.picking')._get_shipping_carrier(cr, uid, ids, name, args, context=context)
         
+    def _progress_created_labels(self, cr, uid, ids, names, arg, context=None):
+        return self.pool.get('stock.picking')._progress_created_labels(cr, uid, ids, name, args, context=context)
+        
     _columns = {
         'state': fields.selection(
             [('draft', 'Draft'),
@@ -832,6 +854,7 @@ class stock_picking_out(osv.osv):
         'label': fields.text('Url Label'),
         'list_tracking_numbers': fields.text('List of Tracking Numbers'),
         'ship_cal_id' : fields.one2many('shipping.calculator','picking_id','Rate Line'),       
+        'progress_created_labels': fields.function(_progress_created_labels, string='Progress of created labels', type='float'),
     }
 
     def replaced_draft_force_assign(self, cr, uid, ids, context=None):
@@ -953,7 +976,19 @@ class stock_picking(osv.osv):
             res.append(('Freight','Freight'))
         return res
         
-
+    def _progress_created_labels(self, cr, uid, ids, names, arg, context=None):
+        res = {}
+        for rec in self.browse(cr, uid, ids, context):
+            pack_dict = {}
+            for move_rec in rec.move_lines:
+                pack_dict[str(move_rec.tracking_id.id)] = move_rec.carrier_tracking_ref
+            pack_dict_counter = Counter(pack_dict.values())
+            if len(pack_dict):
+                res[rec.id] = 100 - ((pack_dict_counter[False] * 100) / len(pack_dict))
+            else:
+                res[rec.id] = 0.0
+        return res
+        
     _columns = {
         'state': fields.selection(
             [('draft', 'Draft'),
@@ -1125,6 +1160,7 @@ class stock_picking(osv.osv):
         'label': fields.text('Url Label'),
         'list_tracking_numbers': fields.text('List of Tracking Numbers'),
         'ship_cal_id':fields.one2many('shipping.calculator','picking_id','Rate Line'),
+        'progress_created_labels': fields.function(_progress_created_labels, string='Progress of created labels', type='float'),
     }
 
     #this because when a picking_in is fully processed, the order will still show "ready to process", let's correct it.
@@ -2803,7 +2839,7 @@ class stock_picking(osv.osv):
                         continue
                         
                         
-                    email_string_tracking_numbers = ''                  
+                    email_sting_tracking_numbers = ''                  
                     for pack_id in pack_dict.keys():
                         #pack_dict['pack_id'][2] is the list of move_ids of this pack.
                         #At this level let's get rid of any exception for the picking and it's moves.
@@ -2883,10 +2919,10 @@ class stock_picking(osv.osv):
                                     #2- a button is associated to picking orders which have already labels created, they can process later the insurance,
                                     #   after fixing the exception
                                     
-                            if email_string_tracking_numbers=='':
-                                email_string_tracking_numbers = str(shipment_buy_response['tracking_code'])
+                            if email_sting_tracking_numbers=='':
+                                email_sting_tracking_numbers = str(shipment_buy_response['tracking_code'])
                             else:
-                                email_string_tracking_numbers = email_string_tracking_numbers + ',' +str(shipment_buy_response['tracking_code'])
+                                email_sting_tracking_numbers = email_sting_tracking_numbers + ',' +str(shipment_buy_response['tracking_code'])
 
                             #Always this block should be immediatly after labels creations, because its data is critical, and should be saved.
                             url_tracking_ref = False
@@ -2946,10 +2982,10 @@ class stock_picking(osv.osv):
                             image_url=stamps_label_URL
                             resource = urllib.urlopen(image_url) 
                             data = base64.encodestring(resource.read()) 
-                            if email_string_tracking_numbers=='':
-                                email_string_tracking_numbers = str(stamps_label_tracking_id)
+                            if email_sting_tracking_numbers=='':
+                                email_sting_tracking_numbers = str(stamps_label_tracking_id)
                             else:
-                                email_string_tracking_numbers = email_string_tracking_numbers + ',' +str(stamps_label_tracking_id)
+                                email_sting_tracking_numbers = email_sting_tracking_numbers + ',' +str(stamps_label_tracking_id)
                                 
                         elif picking_out_record.shipping_carrier == 'UPS WorldShip CSV':
                             image_url = False
@@ -2988,11 +3024,11 @@ class stock_picking(osv.osv):
                         #CREATE PICKING_OUT_LABEL CORESPONDING TO ALL CREATED LABELS IN THIS DELIVERY, 
                         #AND IT'S BY WAREHOUSE: CREATE ONE RECORD FOR EVERY WAREHOUSE, AND EVERY RECORD WILL CONTAIN CORRESPONDING DELIVERY ORDERS
                         stock_picking_out_object.write(cr,uid,picking_out_record.id,{'state':'done',
-                                                                                     'list_tracking_numbers': email_string_tracking_numbers,
+                                                                                     'list_tracking_numbers': email_sting_tracking_numbers,
                                                                                      })
                         cr.commit()
                         
-                        if email_string_tracking_numbers!='':
+                        if email_sting_tracking_numbers!='':
                             stock_picking_out_object.send_email_tracking(cr, uid,picking_out_record.id)
                             _logger.debug('### SAASIER_SHIPPING ### : Sending Label Creation Email for Pick_id: %s .' % str(picking_out_record.id))
                 

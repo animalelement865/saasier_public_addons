@@ -18,13 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+import print_label_xsl 
+import print_label_rml 
 
-import stock
-import wizard
-import report
-import product
-import res_config
-import failed_mail_sent
-
-#import scheduler
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

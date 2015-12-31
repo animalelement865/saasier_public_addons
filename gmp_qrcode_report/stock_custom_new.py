@@ -19,12 +19,11 @@
 #
 ##############################################################################
 
-import stock
-import wizard
-import report
-import product
-import res_config
-import failed_mail_sent
+import base64
+from openerp.osv import fields, osv
 
-#import scheduler
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
+from openerp import tools
+
+from qrcode import *
+from openerp import netsvc
+
