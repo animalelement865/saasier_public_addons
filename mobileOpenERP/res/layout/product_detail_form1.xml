@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp" >
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Product Name"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/ean13result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/ean13"
+            android:layout_alignBottom="@+id/ean13"
+            android:layout_alignLeft="@+id/reference_result"
+            android:text="No Record" />
+
+        <TextView
+            android:id="@+id/reference_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/reference"
+            android:layout_alignBottom="@+id/reference"
+            android:layout_alignLeft="@+id/product_type_result"
+            android:text="No Record" />
+
+        <TextView
+            android:id="@+id/sale_price_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/sale_price"
+            android:layout_alignBottom="@+id/sale_price"
+            android:layout_alignLeft="@+id/ean13result"
+            android:text="No Record" />
+
+        <TextView
+            android:id="@+id/procurement_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/supply_method"
+            android:layout_alignLeft="@+id/sale_price_result"
+            android:text="No Record" />
+
+        <TextView
+            android:id="@+id/supply_method_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/supply_method"
+            android:layout_alignBottom="@+id/supply_method"
+            android:layout_alignLeft="@+id/procurement_result"
+            android:text="No Record" />
+
+        <TextView
+            android:id="@+id/cost_price_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/cost_price"
+            android:layout_alignLeft="@+id/supply_method_result"
+            android:text="No Record" />
+
+        <TextView
+            android:id="@+id/total_quantity_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/totalquantity"
+            android:layout_alignBottom="@+id/totalquantity"
+            android:layout_alignLeft="@+id/cost_price_result"
+            android:maxLength="5"
+            android:text="0" />
+
+<!--         <ProgressBar -->
+<!--             android:id="@+id/progressBar" -->
+<!--             style="?android:attr/progressBarStyleLarge" -->
+<!--             android:layout_width="30dp" -->
+<!--             android:layout_height="30dp" -->
+<!--             android:layout_alignBaseline="@+id/totalquantity" -->
+<!--             android:layout_alignBottom="@+id/totalquantity" -->
+<!--             android:layout_alignLeft="@+id/cost_price_result" -->
+<!--             android:layout_centerHorizontal="true" -->
+<!--             android:indeterminateDrawable="@drawable/progress" -->
+<!--             android:visibility="gone" > -->
+<!--         </ProgressBar> -->
+
+        <ImageView
+            android:id="@+id/imageViewforproduct"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/total_quantity_result"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:src="@drawable/product" />
+
+        <Button
+            android:id="@+id/COA"
+            android:layout_width="105dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/imageViewforproduct"
+            android:layout_centerHorizontal="true"
+           android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+            android:text="COA"
+            />
+
+        <TextView
+            android:id="@+id/reference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/product_type"
+            android:layout_alignRight="@+id/cost_price"
+            android:layout_below="@+id/product_type"
+            android:layout_marginTop="16dp"
+            android:text="Reference" />
+
+        <TextView
+            android:id="@+id/ean13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/reference"
+            android:layout_alignRight="@+id/reference"
+            android:layout_below="@+id/reference"
+            android:layout_marginTop="15dp"
+            android:text="EAN13" />
+
+        <TextView
+            android:id="@+id/product_type_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/reference"
+            android:layout_alignLeft="@+id/imageViewforproduct"
+            android:layout_marginLeft="30dp"
+            android:text="No Record" />
+
+        <TextView
+            android:id="@+id/product_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/cost_price"
+            android:layout_below="@+id/information"
+            android:layout_marginTop="24dp"
+            android:text="Product type" />
+
+        <TextView
+            android:id="@+id/procurement_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/procurment"
+            android:layout_marginTop="24dp"
+            android:text="Procurement Method" />
+
+        <TextView
+            android:id="@+id/sale_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/ean13"
+            android:layout_below="@+id/ean13"
+            android:layout_marginTop="18dp"
+            android:text="sale price" />
+
+        <TextView
+            android:id="@+id/supply_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/procurement_method"
+            android:layout_marginTop="14dp"
+            android:text="supply method" />
+
+        <TextView
+            android:id="@+id/procurment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sale_price_result"
+            android:layout_marginTop="16dp"
+            android:background="#cccccc"
+            android:gravity="center_horizontal"
+            android:text="PROCUREMENT"
+              android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/cost_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/supply_method"
+            android:layout_marginTop="18dp"
+            android:layout_toLeftOf="@+id/imageViewforproduct"
+            android:text="Cost Price" />
+
+        <TextView
+            android:id="@+id/stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/cost_price_result"
+            android:layout_marginTop="14dp"
+            android:background="#cccccc"
+            android:gravity="center_horizontal"
+            android:text="STOCK"
+              android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/information"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/product_name"
+            android:layout_marginTop="20dp"
+            android:background="#cccccc"
+            android:gravity="center_horizontal"
+              android:textStyle="bold"
+            android:text="INFORMATION"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/MFO"
+            android:layout_width="105dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@+id/COA"
+            android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+            android:text="MFO"
+        />
+
+        <Button
+            android:id="@+id/Inventory"
+            android:layout_width="105dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/COA"
+           android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+            android:text="Inventory"
+            />
+
+        <TextView
+            android:id="@+id/uom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/stock"
+            android:layout_below="@+id/stock"
+            android:layout_marginTop="20dp"
+            android:text="UOM" />
+
+        <TextView
+            android:id="@+id/totalquantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/uom"
+            android:layout_below="@+id/uom"
+            android:layout_marginTop="20dp"
+            android:text="Total Quantity" />
+
+        <TextView
+            android:id="@+id/oum_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/uom"
+            android:layout_alignLeft="@+id/total_quantity_result"
+            android:text="No Record" />
+    </RelativeLayout>
+
+</ScrollView>

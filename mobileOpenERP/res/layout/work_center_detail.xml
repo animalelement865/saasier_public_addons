@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/name_wo_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/sch_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btnstart"
+            android:layout_below="@+id/plan_date"
+            android:layout_marginTop="20dp"
+            android:text="Schedule Date" />
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/end_date"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#AAAAAA"
+            android:gravity="center_horizontal"
+             android:textStyle="bold"
+            android:text="Duration"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/plan_date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btnstart"
+            android:layout_marginTop="20dp"
+            android:background="#AAAAAA"
+            android:gravity="center_horizontal"
+             android:textStyle="bold"
+            android:text="Planned Date"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/no_of_cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/end_date"
+            android:layout_below="@+id/duration"
+            android:layout_marginTop="20dp"
+            android:text="No Of Cycle" />
+
+        <TextView
+            android:id="@+id/no_of_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/no_of_cycle"
+            android:layout_below="@+id/no_of_cycle"
+            android:layout_marginTop="20dp"
+            android:text="No Of Hours" />
+
+        <TextView
+            android:id="@+id/production_date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+             android:textStyle="bold"
+            android:layout_below="@+id/no_of_hour"
+            android:layout_marginTop="20dp"
+            android:background="#AAAAAA"
+            android:gravity="center_horizontal"
+            android:text="Actual Production Date"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/sch_date"
+            android:layout_below="@+id/sch_date"
+            android:layout_marginTop="20dp"
+            android:text="End Date" />
+
+        <TextView
+            android:id="@+id/startdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/no_of_hour"
+            android:layout_below="@+id/production_date"
+            android:layout_marginTop="20dp"
+            android:text="Start Date" />
+
+        <TextView
+            android:id="@+id/enddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/startdate"
+            android:layout_below="@+id/startdate"
+            android:layout_marginTop="20dp"
+            android:text="End Date" />
+
+        <TextView
+            android:id="@+id/enddateresult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/enddate"
+            android:layout_alignLeft="@+id/startdateresult"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/workinghours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/enddate"
+            android:layout_below="@+id/enddate"
+            android:layout_marginTop="20dp"
+            android:text="Working Hours" />
+
+        <TextView
+            android:id="@+id/workinghourresult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/workinghours"
+            android:layout_alignBottom="@+id/workinghours"
+            android:layout_alignLeft="@+id/enddateresult"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/Product_To_Produce"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/workinghours"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#AAAAAA"
+            android:gravity="center_horizontal"
+             android:textStyle="bold"
+            android:text="Product To Produce"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/qty"
+            android:layout_below="@+id/qty"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="10dp"
+            android:text="Hours" />
+
+        <TextView
+            android:id="@+id/hourresult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/hours"
+            android:layout_alignBottom="@+id/hours"
+            android:layout_alignLeft="@+id/qtyresult"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/end_date_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/end_date"
+            android:layout_alignBottom="@+id/end_date"
+            android:layout_alignLeft="@+id/sch_date_result"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/cycle_resule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/no_of_cycle"
+            android:layout_alignBottom="@+id/no_of_cycle"
+            android:layout_alignLeft="@+id/end_date_result"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/hour_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/production_date"
+            android:layout_alignLeft="@+id/cycle_resule"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/startdateresult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/enddate"
+            android:layout_alignLeft="@+id/hour_result"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/sch_date_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/end_date"
+           
+            android:layout_toRightOf="@+id/support"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/qtyresult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/hours"
+            android:layout_alignLeft="@+id/workinghourresult"
+            android:text="false" />
+
+        <Button
+            android:id="@+id/btnstart"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/name_wo_detail"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_marginLeft="31dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/buttonlayout"
+            android:textStyle="bold"
+            android:text="Start"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/workinghours"
+            android:layout_below="@+id/productname_wo"
+            android:layout_marginTop="20dp"
+            android:text="Quantity" />
+
+        <TextView
+            android:id="@+id/productname_wo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/qty"
+            android:layout_below="@+id/Product_To_Produce"
+            android:layout_marginTop="20dp"
+            android:text="Product" />
+
+        <TextView
+            android:id="@+id/product_wo_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/productname_wo"
+            android:layout_alignBottom="@+id/productname_wo"
+            android:layout_alignLeft="@+id/qtyresult"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/support"
+            android:layout_width="5dp"
+            android:layout_height="2dp"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="20dp"
+             />
+
+        <Button
+            android:id="@+id/pending"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_above="@+id/plan_date"
+            android:layout_alignTop="@+id/btnstart"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/btnstart"
+            android:background="@drawable/buttonlayout"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:visibility="invisible"
+            android:text="Pending"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/View_Details"
+            android:layout_width="fill_parent"
+            android:layout_height="35dp"
+          
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/hours"
+            android:layout_marginTop="20dp"
+              android:background="@android:color/black"
+                android:textColor="@android:color/white" 
+               
+            android:textStyle="bold"
+            android:text="View Details" />
+        
+         <Button
+            android:id="@+id/temp"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:visibility="invisible"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/hours"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:text="" />
+
+    </RelativeLayout>
+
+</ScrollView>

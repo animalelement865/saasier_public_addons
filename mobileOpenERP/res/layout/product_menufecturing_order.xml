@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <TextView
+        android:id="@+id/txv_for_product_no_mfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Menufecturing Order Of This Product " />
+
+    <ListView
+        android:id="@+id/listViewOfMenufecturingOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#7E7E7E"
+        android:dividerHeight="1dp" >
+    </ListView>
+
+</RelativeLayout>

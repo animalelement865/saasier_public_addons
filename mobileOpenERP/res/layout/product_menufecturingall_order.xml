@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+          <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.23"
+            android:gravity="center"
+               android:textStyle="bold"
+            android:text="Reference"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="1dp"
+               android:textStyle="bold"
+            android:layout_height="match_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/textView2"
+               android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.19"
+            android:gravity="center"
+            android:text="Product"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="1dp"
+               android:textStyle="bold"
+            android:layout_height="match_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.27"
+            android:gravity="center"
+               android:textStyle="bold"
+            android:text="QTY "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="1dp"
+               android:textStyle="bold"
+            android:layout_height="match_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+               android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_weight="0.27"
+            android:gravity="center"
+            android:text="State"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+      
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+       android:background="@android:color/black" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+         <TextView
+        android:id="@+id/txv_for_product_no_mfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+    	android:layout_centerInParent="true"
+    	android:paddingBottom="50dp"
+        android:text="No Any Menufecturing Order" />
+         
+         
+          <ProgressBar
+        android:id="@+id/progressBarforconsumeproductlist"
+        style="?android:attr/progressBarStyleLarge"
+       android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+    	android:layout_centerInParent="true"
+    	android:visibility="gone"
+    	android:paddingBottom="50dp" />
+
+    <ListView
+        android:id="@+id/listViewOfMenufecturingOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#7E7E7E"
+        android:dividerHeight="1dp" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+       
+        android:layout_below="@+id/listViewOfMenufecturingOrder"
+        android:background="#AAAAAA"
+        />
+
+    </RelativeLayout>
+  </LinearLayout>

@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <ListView
+        android:id="@+id/partner_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#7E7E7E"
+        android:dividerHeight="1dp" >
+    </ListView>
+
+</LinearLayout>

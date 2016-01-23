@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:text="Click Barcode To Scan" />
+
+    <Button
+        android:id="@+id/barcode"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:background="@drawable/barcode" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <!-- <TextView -->
+        <!-- android:id="@+id/loading" -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:text="Loading ..." -->
+        <!-- android:layout_gravity="center_vertical"/> -->
+        <!-- <ProgressBar -->
+        <!-- android:id="@+id/progressBar" -->
+        <!-- style="?android:attr/progressBarStyleLarge" -->
+        <!-- android:layout_width="50dp" -->
+        <!-- android:layout_height="50dp" -->
+        <!-- android:layout_centerHorizontal="true" -->
+        <!-- android:layout_centerVertical="true" -->
+        <!-- android:layout_gravity="center_horizontal" -->
+        <!-- android:indeterminateDrawable="@drawable/progress" >  </ProgressBar> -->
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#7E7E7E"
+        android:dividerHeight="1dp"
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true" >
+    </ListView>
+
+</LinearLayout>

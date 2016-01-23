@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+   
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/hour_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/hour_plus"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="+"
+            
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="1dp"
+                android:background="@android:color/white" />
+
+<!--              android:background="@drawable/picker_top"  -->
+            <EditText
+                android:id="@+id/hour_display"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="1dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:inputType="number"
+                android:singleLine="true" >
+            </EditText>
+
+            <Button
+                android:id="@+id/hour_minus"
+             android:layout_width="40dp"
+               android:text="-"
+                     
+                     android:textSize="22dp"
+                 android:textStyle="bold"
+                      android:layout_marginBottom="1dp"
+                android:layout_height="40dp"
+                   android:background="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/min_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/min_plus"
+               android:layout_width="40dp"
+                 android:text="+"
+                    
+                     android:textSize="22dp"
+                 android:textStyle="bold"
+                      android:layout_marginBottom="1dp"
+                android:layout_height="40dp"
+                android:background="@android:color/white" />
+
+            <EditText
+                android:id="@+id/min_display"
+               android:layout_width="40dp"
+                android:layout_height="40dp"
+                 
+                     
+                   android:textSize="15dp"   
+                 android:textStyle="bold"
+                      android:layout_marginBottom="1dp"
+             android:background="@android:color/white"
+                android:gravity="center"
+                android:inputType="number"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/min_minus"
+              android:layout_width="40dp"
+                android:layout_height="40dp"
+                  android:text="-"
+                   
+                     android:textSize="22dp"
+                      
+               
+                 android:textStyle="bold"
+                      android:layout_marginBottom="1dp"
+              android:background="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/min_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/am_pm"
+                android:layout_width="40dp"
+                 
+                   android:textSize="15dp"
+                    
+                 android:textStyle="bold"
+                      android:layout_marginBottom="1dp"
+                android:layout_height="40dp"
+                 android:background="@android:color/white"
+                android:text="AM" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+
+
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!--     android:layout_width="fill_parent" -->
+<!--     android:layout_height="fill_parent" -->
+<!--     android:orientation="horizontal" > -->
+
+<!--     <LinearLayout -->
+<!--         android:layout_width="100dp" -->
+<!--         android:layout_height="100dp" -->
+<!--         android:orientation="horizontal" > -->
+
+<!--         <LinearLayout -->
+<!--             android:id="@+id/hour_container" -->
+<!--             android:layout_width="match_parent" -->
+<!--             android:layout_height="match_parent" -->
+<!--             android:layout_margin="5dp" -->
+<!--                android:layout_weight="0.3" -->
+<!--             android:gravity="center" -->
+<!--             android:orientation="vertical" > -->
+
+<!--             <Button -->
+<!--                 android:id="@+id/hour_plus" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                 android:layout_weight="0.3" -->
+<!--                 android:background="@drawable/picker_top" /> -->
+
+<!--             <EditText -->
+<!--                 android:id="@+id/hour_display" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                 android:background="@drawable/picker_middle" -->
+<!--                 android:gravity="center" -->
+<!--                  android:layout_weight="0.3" -->
+<!--                 android:inputType="number" -->
+<!--                 android:singleLine="true" > -->
+<!--             </EditText> -->
+
+<!--             <Button -->
+<!--                 android:id="@+id/hour_minus" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                  android:layout_weight="0.3" -->
+<!--                 android:background="@drawable/picker_bottom" /> -->
+<!--         </LinearLayout> -->
+
+<!--         <LinearLayout -->
+<!--             android:id="@+id/min_container" -->
+<!--               android:layout_weight="0.3" -->
+<!--             android:layout_width="match_parent" -->
+<!--             android:layout_height="match_parent" -->
+<!--             android:layout_margin="5dp" -->
+<!--             android:gravity="center" -->
+<!--             android:orientation="vertical" > -->
+
+<!--             <Button -->
+<!--                 android:id="@+id/min_plus" -->
+<!--                    android:layout_weight="0.3" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                 android:background="@drawable/picker_top" /> -->
+
+<!--             <EditText -->
+<!--                 android:id="@+id/min_display" -->
+<!--                    android:layout_weight="0.3" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                 android:background="@drawable/picker_middle" -->
+<!--                 android:gravity="center" -->
+<!--                 android:inputType="number" -->
+<!--                 android:singleLine="true" /> -->
+
+<!--             <Button -->
+<!--                 android:id="@+id/min_minus" -->
+<!--                    android:layout_weight="0.3" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                 android:background="@drawable/picker_bottom" /> -->
+<!--         </LinearLayout> -->
+
+<!--         <LinearLayout -->
+<!--             android:id="@+id/min_container" -->
+<!--               android:layout_weight="0.3" -->
+<!--             android:layout_width="match_parent" -->
+<!--             android:layout_height="match_parent" -->
+<!--             android:layout_margin="5dp" -->
+<!--             android:gravity="center" -->
+<!--             android:orientation="vertical" > -->
+<!--  <Button -->
+<!--                 android:id="@+id/hour_plus" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                 android:layout_weight="0.3" -->
+<!--                 android:visibility="invisible" -->
+<!--                 android:background="@drawable/picker_top" /> -->
+
+<!--             <Button -->
+<!--                 android:id="@+id/am_pm" -->
+               
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                 android:layout_marginTop="2dp" -->
+<!--                 android:layout_weight="0.25" -->
+<!--                 android:layout_gravity="center_vertical" -->
+<!--                 android:background="@drawable/button_hover" -->
+<!--                 android:textSize="5dp" -->
+<!--                 android:text="AM" /> -->
+          
+
+<!--             <Button -->
+<!--                 android:id="@+id/hour_minus" -->
+<!--                 android:layout_width="match_parent" -->
+<!--                 android:layout_height="match_parent" -->
+<!--                  android:layout_weight="0.3" -->
+<!--                     android:visibility="invisible" -->
+<!--                 android:background="@drawable/picker_bottom" /> -->
+           
+
+<!--         </LinearLayout> -->
+<!--     </LinearLayout> -->
+
+<!-- </LinearLayout> -->

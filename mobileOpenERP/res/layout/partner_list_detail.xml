@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingTop="?android:attr/actionBarSize" >
+
+        <ListView
+            android:id="@+id/partner_detail_listView1"
+            android:layout_width="match_parent"
+            android:layout_height="332dp"
+            android:layout_alignParentLeft="true" >
+        </ListView>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/partner_detail_listView1"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/map_icon" />
+    </RelativeLayout>
+
+</ScrollView>

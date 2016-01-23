@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_below="@+id/hour_result"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/update_work_order"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/linearLayout1"
+        android:layout_toLeftOf="@+id/linearLayout1"
+        android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+        android:text="Update"
+       />
+
+    <Button
+        android:id="@+id/cancle_work_order"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/linearLayout1"
+        android:layout_toRightOf="@+id/linearLayout1"
+          android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+        android:text="Cancle"
+    />
+
+    <EditText
+        android:id="@+id/qty_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/qty_order"
+        android:layout_alignBottom="@+id/qty_order"
+        android:layout_centerHorizontal="true"
+        android:ems="8"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/hour_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/hours"
+        android:layout_alignBottom="@+id/hours"
+        android:layout_alignLeft="@+id/qty_result"
+        android:ems="8"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/qty_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="124dp"
+        android:layout_toLeftOf="@+id/qty_result"
+        android:text="QTY: " />
+
+    <TextView
+        android:id="@+id/hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/qty_result"
+        android:layout_marginTop="28dp"
+        android:layout_toLeftOf="@+id/hour_result"
+        android:text="HOURS: " />
+
+</RelativeLayout>

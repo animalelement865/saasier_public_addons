@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+   >
+
+        
+        <TextView
+        android:id="@+id/menu_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.23"
+        android:gravity="center"
+        android:text="Reference" />
+
+    <!-- <TextView -->
+    <!-- android:id="@+id/textView1" -->
+    <!-- android:layout_width="1dp" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_weight="0.24" -->
+    <!-- android:text="TextView" /> -->
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="#AAAAAA"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/moproduct"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.19"
+        android:gravity="center"
+        android:text="product" />
+
+    <!-- <TextView -->
+    <!-- android:id="@+id/textView2" -->
+    <!-- android:layout_width="1dp" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_weight="0.24" -->
+    <!-- android:text="TextView" /> -->
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="#AAAAAA"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/qty"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.27"
+        android:gravity="center"
+        android:text="QTY" />
+
+    <!-- <TextView -->
+    <!-- android:id="@+id/textView3" -->
+    <!-- android:layout_width="1dp" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_weight="0.24" -->
+    <!-- android:text="TextView" /> -->
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="#AAAAAA"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.27"
+        android:gravity="center"
+        android:text="State" />
+</LinearLayout>

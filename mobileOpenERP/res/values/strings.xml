@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_activity_main">OpenERP</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="menutitle_EDIT">Edit</string>
+    <string name="menutitle_DELETE">Delete</string>
+    <string name="Dash_Board">Dash Board</string>
+     <string name="Search_product">Search Product</string>
+	<string name="Search_partner">Search Partner</string>
+</resources>

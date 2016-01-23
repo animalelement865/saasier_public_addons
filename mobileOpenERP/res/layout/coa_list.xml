@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <TextView
+        android:id="@+id/productname"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:textSize="25dp"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:text="name" />
+
+    <TextView
+        android:id="@+id/productname"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="#AAAAAA"
+        android:gravity="center_horizontal"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#7E7E7E"
+        android:dividerHeight="1dp"
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true" >
+    </ListView>
+
+</LinearLayout>

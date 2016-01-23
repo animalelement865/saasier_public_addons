@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@android:color/black" >
+
+      <TextView
+          android:id="@+id/textView1"
+          android:layout_width="fill_parent"
+          android:layout_height="30dp"
+          android:gravity="center"
+          android:textSize="22dp"
+          android:text="Select Date"
+          android:textStyle="bold"
+          android:background="@android:color/white" />
+
+      <com.openerp.addons.idea.DatePicker
+        android:id="@+id/datePicker1"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content" >
+      </com.openerp.addons.idea.DatePicker>
+
+    <com.openerp.addons.idea.TimePicker
+        android:id="@+id/timePicker2"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content" >
+    </com.openerp.addons.idea.TimePicker>
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:text="Update"
+        android:background="@android:color/white" />
+   
+     </LinearLayout>

@@ -1,0 +1,128 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp" >
+
+        <TextView
+            android:id="@+id/equ_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="center_horizontal"
+             android:textStyle="bold"
+            android:text="Equipment Name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/work_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+             android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:text="Work Center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.23"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="MO"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.22"
+            android:gravity="center"
+                android:textStyle="bold"
+            android:text="Schedule Date"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+                android:textStyle="bold"
+            android:layout_weight="0.23"
+            android:gravity="center"
+            android:text="Product "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.28"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="QTY"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black" >
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listforqr_equip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#7E7E7E"
+        android:dividerHeight="1dp"
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true" >
+    </ListView>
+
+    <!-- android:fadingEdge="none" -->
+    <!-- android:scrollbars="none" -->
+    <!-- android:scrollbarSize="0dp" -->
+
+</LinearLayout>

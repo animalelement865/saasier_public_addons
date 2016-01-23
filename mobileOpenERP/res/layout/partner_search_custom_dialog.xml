@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="300dp"
+    android:layout_height="120dp"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal" 
+    android:background="#F5F5F5" >
+
+ 
+ <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#F5F5F5"
+        android:text="Partner Name"
+       	android:layout_gravity="center"
+        android:ems="10"
+         android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+         />
+  <TextView
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+       android:background="#AAAAAA" />
+<!--  Customer -->
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView_product_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:paddingTop="15dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:textColor="@android:color/black"
+        android:completionThreshold="1"
+        android:hint="Write Name" >
+
+        <requestFocus />
+    </AutoCompleteTextView>
+
+</LinearLayout>

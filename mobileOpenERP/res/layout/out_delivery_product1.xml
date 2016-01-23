@@ -1,0 +1,226 @@
+
+ <ScrollView 
+     xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+   
+    android:paddingTop="?android:attr/actionBarSize"
+        >
+
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:text="CLICK QRCODE TO SCAN" />
+    <Button
+        android:id="@+id/qrcode_to_prod_id"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:background="@drawable/qrcode_btn" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="15dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="25dp" >
+
+            <TextView
+                android:id="@+id/Tcustomer"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="Customer"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Torigin"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="Source Doc"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Tmintime"
+                android:layout_width="wrap_content"
+              android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="Scheduled Time"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Tcreationdate"
+                android:layout_width="wrap_content"
+               android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="Creation Date"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Tstatus"
+                android:layout_width="wrap_content"
+               android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="Status"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="30dp" >
+
+            <TextView
+                android:id="@+id/Tcustomerans"
+                android:layout_width="wrap_content"
+               android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="false" />
+
+            <TextView
+                android:id="@+id/Toriginans"
+                android:layout_width="wrap_content"
+               android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="false" />
+
+            <TextView
+                android:id="@+id/Tmintimeans"
+                android:layout_width="wrap_content"
+                android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="false" />
+
+            <TextView
+                android:id="@+id/Tcreationdateans"
+                android:layout_width="wrap_content"
+               android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="false" />
+
+            <TextView
+                android:id="@+id/Tstateans"
+                android:layout_width="wrap_content"
+               android:layout_height="41dp"
+                android:paddingBottom="7dp"
+                android:text="state" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#AAAAAA" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/outproduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".26"
+            android:gravity="center"
+            android:paddingBottom="2dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="2dp"
+            android:text="Product name"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            />
+
+        <!-- <Button -->
+        <!-- android:id="@+id/scan_prod_qr" -->
+        <!-- android:layout_width="match_parent" -->
+        <!-- android:layout_height="25dp" -->
+        <!-- android:layout_weight=".37" -->
+        <!-- android:gravity="center" -->
+        <!-- android:textSize="16dp" -->
+        <!-- android:textColor="@android:color/black" -->
+        <!-- android:background="@android:color/white" -->
+        <!-- android:padding="2dp" -->
+        <!-- android:textStyle="bold" -->
+        <!-- android:text="QR Scan" /> -->
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/serial_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".37"
+            android:gravity="center"
+            android:paddingRight="3dp"
+            android:text="serial no"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/outqty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".37"
+            android:gravity="center"
+            android:paddingLeft="3dp"
+            android:text="QTY"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#AAAAAA" />
+
+<!--     <LinearLayout -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="100dp" -->
+<!--         android:orientation="vertical" > -->
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#7E7E7E"
+            android:dividerHeight="1dp" >
+        </ListView>
+
+<!--     </LinearLayout> -->
+
+</LinearLayout>
+    </ScrollView>

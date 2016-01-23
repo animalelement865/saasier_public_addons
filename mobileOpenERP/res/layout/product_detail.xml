@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <Button
+        android:id="@+id/product_coa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/productName"
+        android:layout_alignRight="@+id/productName"
+        android:layout_centerVertical="true"
+        android:text="View COA" />
+
+    <Button
+        android:id="@+id/product_mro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/product_coa"
+        android:layout_alignRight="@+id/product_coa"
+        android:layout_below="@+id/product_coa"
+        android:layout_marginTop="63dp"
+        android:text="Menufecturing Order" />
+
+    <TextView
+        android:id="@+id/productName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/product_coa"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="76dp"
+        android:fontFamily="sans-sarif-light"
+        android:text="ProductDetail"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#cc0000"
+        android:textStyle="bold" />
+
+</RelativeLayout>

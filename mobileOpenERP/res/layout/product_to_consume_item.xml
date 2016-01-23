@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+<!--    <TextView -->
+<!--                 android:id="@+id/ref" -->
+<!--                 android:layout_width="85dp" -->
+<!--                 android:layout_height="fill_parent" -->
+<!--                 android:layout_gravity="center" -->
+              
+<!--                 android:gravity="center" -->
+<!--                 android:text="Null" -->
+<!--                 /> -->
+
+<!--             <TextView -->
+<!--                 android:id="@+id/textView19" -->
+<!--                 android:layout_width="1dp" -->
+<!--                 android:layout_height="fill_parent" -->
+<!--                 android:background="#AAAAAA" /> -->
+
+           <TextView
+                android:id="@+id/pro"
+                android:layout_width="match_parent"
+                android:layout_weight="0.16"
+             	android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Null"
+               />
+			
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="1dp"
+              	android:layout_height="fill_parent"
+           
+                android:background="#AAAAAA" />
+
+            <TextView
+                android:id="@+id/qty"
+         		android:layout_width="match_parent"
+           		android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                  android:layout_weight="0.20"
+                android:gravity="center"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+        
+                android:background="#AAAAAA" />
+
+            <TextView
+                android:id="@+id/uom"
+                  android:layout_width="match_parent"
+             android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                 android:layout_weight="0.20"
+                android:gravity="center"
+                android:text="Null"
+                />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="1dp"
+              android:layout_height="fill_parent"
+          
+                android:background="#AAAAAA" />
+
+            <TextView
+                android:id="@+id/sno"
+                 android:layout_width="match_parent"
+             	 android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                   android:layout_weight="0.20"
+                android:gravity="center"
+                android:text="0"
+              />
+              <TextView
+                android:id="@+id/textView33"
+                android:layout_width="1dp"
+            android:layout_height="fill_parent"
+           
+                android:background="#AAAAAA" />
+
+             <Button
+                 android:id="@+id/btnevent"
+                 android:layout_width="52dp"
+                 android:layout_height="45dp"
+                   
+                  
+                 android:background="@drawable/arrow_forward" />
+   
+</LinearLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <!-- android:padding="5dp" -->
+
+    <TextView
+        android:id="@+id/MO"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.23"
+        android:gravity="center"
+        android:text="mo" />
+
+    <!-- <TextView -->
+    <!-- android:id="@+id/textView1" -->
+    <!-- android:layout_width="1dp" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_weight="0.24" -->
+    <!-- android:text="TextView" /> -->
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="#AAAAAA"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/Schedule_date"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.22"
+        android:gravity="center"
+        android:text="s_date" />
+
+    <!-- <TextView -->
+    <!-- android:id="@+id/textView2" -->
+    <!-- android:layout_width="1dp" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_weight="0.24" -->
+    <!-- android:text="TextView" /> -->
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="#AAAAAA"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/product"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.23"
+        android:gravity="center"
+        android:text="product" />
+
+    <!-- <TextView -->
+    <!-- android:id="@+id/textView3" -->
+    <!-- android:layout_width="1dp" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_weight="0.24" -->
+    <!-- android:text="TextView" /> -->
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="#AAAAAA"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/Qty"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.28"
+        android:gravity="center"
+        android:text="qty" />
+
+</LinearLayout>

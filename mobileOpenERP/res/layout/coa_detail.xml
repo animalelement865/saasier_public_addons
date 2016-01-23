@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:paddingLeft="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+             android:textStyle="bold"
+            android:text="Name :" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#AAAAAA"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+             android:textStyle="bold"
+            android:padding="10dp"
+            android:text="Indicator :" />
+
+        <TextView
+            android:id="@+id/start_date"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#AAAAAA"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Unit :" />
+
+        <TextView
+            android:id="@+id/startdate_result"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#AAAAAA"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+             android:textStyle="bold"
+            android:padding="10dp"
+            android:text="Value :" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/namecoaspecs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#AAAAAA"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#AAAAAA"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:background="#AAAAAA"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="false" />
+    </LinearLayout>
+
+</LinearLayout>

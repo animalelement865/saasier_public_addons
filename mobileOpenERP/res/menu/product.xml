@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/Dash_Board"
+        android:title="@string/Dash_Board">
+    </item>
+    
+     <item
+        android:id="@+id/Search_product"
+        android:title="@string/Search_product"
+        android:icon="@drawable/search_product2"
+        android:showAsAction="always">
+    </item>
+
+</menu>

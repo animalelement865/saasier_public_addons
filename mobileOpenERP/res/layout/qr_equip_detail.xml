@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/enddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Name"
+             android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView0"
+            android:layout_below="@+id/textView0"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:text="QR Code" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical" >
+        </LinearLayout>
+
+        <!-- <Button -->
+        <!-- android:id="@+id/button2" -->
+        <!-- android:layout_width="75dp" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignTop="@+id/linearLayout1" -->
+        <!-- android:layout_toRightOf="@+id/linearLayout1" -->
+        <!-- android:text="MT Records" -->
+        <!-- android:background="#410F0F" -->
+        <!-- android:textColor="#F2F1CB" -->
+        <!-- android:layout_marginLeft="1dp" /> -->
+        <!-- android:text="Maintenance Records" -->
+        <!-- <Button -->
+        <!-- android:id="@+id/button4" -->
+        <!-- android:layout_width="75dp" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignBaseline="@+id/button2" -->
+        <!-- android:layout_alignBottom="@+id/button2" -->
+        <!-- android:layout_toRightOf="@+id/button2" -->
+        <!-- android:text="Perform MT" -->
+        <!-- android:background="#410F0F" -->
+        <!-- android:textColor="#F2F1CB" -->
+        <!-- android:layout_marginLeft="1dp" /> -->
+
+
+        <!-- <Button -->
+        <!-- android:id="@+id/button1" -->
+        <!-- android:layout_width="75dp" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignBaseline="@+id/button2" -->
+        <!-- android:layout_alignBottom="@+id/button2" -->
+        <!-- android:layout_toLeftOf="@+id/button2" -->
+        <!-- android:text="View SOP" -->
+        <!-- android:background="#410F0F" -->
+        <!-- android:textColor="#F2F1CB" -->
+        <!-- android:layout_marginLeft="1dp" /> -->
+
+
+        <!-- <Button -->
+        <!-- android:id="@+id/button3" -->
+        <!-- android:layout_width="75dp" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:layout_alignBaseline="@+id/button1" -->
+        <!-- android:layout_alignBottom="@+id/button1" -->
+        <!-- android:layout_toLeftOf="@+id/button1" -->
+        <!-- android:text="Work Orders" -->
+        <!-- android:textColor="#F2F1CB" -->
+
+
+        <!-- android:background="#410F0F" -->
+        <!-- /> -->
+
+        <LinearLayout
+            android:id="@+id/linearLayout61"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/imageView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".20"
+              android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+                android:gravity="center"
+                android:text="Work Orders"
+                />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="1dp"
+                android:layout_weight=".20"
+               android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+                android:gravity="center"
+                android:text="MT Records"
+             />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="1dp"
+                android:layout_weight=".20"
+                android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+                android:gravity="center"
+                android:text=" View SOP"
+               />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="1dp"
+                android:layout_weight=".20"
+               android:background="@android:color/black"
+           android:textColor="@android:color/white"
+           android:textStyle="bold"
+                android:gravity="center"
+                android:text="Maintenance"
+                />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="25dp"
+            android:text="Asset No" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/start_date"
+            android:layout_below="@+id/start_date"
+            android:layout_marginTop="25dp"
+            android:text="Criticality" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/start_date"
+            android:layout_alignBottom="@+id/start_date"
+            android:layout_alignLeft="@+id/textView5"
+            android:text="Serial:" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView1"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignLeft="@+id/textView6"
+            android:text="Criticality:" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView0"
+            android:layout_alignBottom="@+id/textView0"
+            android:layout_alignLeft="@+id/textView7"
+            android:text="Asset No:" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/qr_code"
+            android:layout_alignBottom="@+id/qr_code"
+            android:layout_alignLeft="@+id/textView8"
+            android:text="QR Code:" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/textView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            android:src="@drawable/qrcode" />
+
+        <TextView
+            android:id="@+id/start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/startdate_result"
+            android:layout_below="@+id/startdate_result"
+            android:layout_marginTop="25dp"
+            android:text="Serial" />
+
+        <TextView
+            android:id="@+id/startdate_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+         	android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="25dp"
+            android:text="Model" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/enddate"
+            android:layout_marginTop="25dp"
+            android:background="#AAAAAA"
+             android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:text="Details"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/qr_code"
+            android:layout_marginTop="25dp"
+            android:background="#AAAAAA"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/startdate_result"
+            android:layout_alignBottom="@+id/startdate_result"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="19dp"
+            android:text="Model:" />
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/name_mro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/maintenance_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btnstart"
+            android:layout_below="@+id/plan_date"
+            android:layout_marginTop="20dp"
+            android:text="Maintenance Type" />
+
+        <TextView
+            android:id="@+id/plan_date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btnstart"
+            android:layout_marginTop="20dp"
+            android:background="#AAAAAA"
+             android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:text="Type"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/description"
+            android:layout_below="@+id/duration"
+            android:layout_marginTop="20dp"
+            android:text="Location" />
+
+        <TextView
+            android:id="@+id/production_date"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ll"
+            android:layout_marginTop="20dp"
+             android:textStyle="bold"
+            android:background="#AAAAAA"
+            android:gravity="center_horizontal"
+            android:text="Problem"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/maintenance_type"
+            android:layout_below="@+id/maintenance_type"
+            android:layout_marginTop="20dp"
+            android:text="Description" />
+
+        <TextView
+            android:id="@+id/problem_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/location"
+            android:layout_below="@+id/production_date"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="15dp"
+            android:text="Problem Description" />
+
+        <TextView
+            android:id="@+id/date_planned"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/description"
+            android:layout_below="@+id/description"
+            android:layout_marginTop="20dp"
+            android:text="Date Planned" />
+
+        <TextView
+            android:id="@+id/date_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/date_planned"
+            android:layout_alignLeft="@+id/des_result"
+            android:text="false" />
+
+        <LinearLayout
+              android:id="@+id/ll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            
+            android:layout_alignTop="@+id/location"
+            android:layout_below="@+id/duration"
+            android:layout_alignLeft="@+id/m_type_detail"
+            >
+        <TextView
+            android:id="@+id/location_resule"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+          
+            android:text="false" />
+         </LinearLayout>
+
+        <TextView
+            android:id="@+id/des_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/date_planned"
+            android:layout_alignLeft="@+id/ll"
+            android:text="false" />
+
+        <TextView
+            android:id="@+id/m_type_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/description"
+            android:layout_toRightOf="@+id/support"
+            android:layout_marginLeft="10dp"
+            android:text="false" />
+
+        <Button
+            android:id="@+id/btnstart"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/name_mro"
+            android:layout_marginLeft="31dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/buttonlayout"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="Confirm MT"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/support"
+            android:layout_width="5dp"
+            android:layout_height="2dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/cancle1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_above="@+id/plan_date"
+            android:layout_alignTop="@+id/btnstart"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/btnstart"
+            android:background="@drawable/buttonlayout"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:text="Cancel"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            />
+
+       
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/date_planned"
+            android:layout_marginTop="20dp"
+            android:background="#AAAAAA"
+            android:gravity="center_horizontal"
+             android:textStyle="bold"
+            android:text="Location"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/pro_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ll"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="15dp"
+            android:text="false" />
+
+       
+
+    </RelativeLayout>
+
+</ScrollView>

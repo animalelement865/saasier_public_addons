@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+  	android:background="#AAAAAA"
+	android:paddingBottom="1dp"
+    android:paddingRight="1dp" >
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        
+        android:background="@android:color/white"
+        android:gravity="center">
+
+    <ImageView
+        android:id="@+id/grid_image"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp" >
+    </ImageView>
+<!--  <TextView -->
+<!--         android:id="@+id/textView1" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="1dp" -->
+<!--         android:background="@android:color/black" /> -->
+ 
+ 
+<!--    <TextView -->
+      
+<!--         android:layout_width="1dp" -->
+<!--         android:layout_height="fill_parent" -->
+<!--         android:background="@android:color/black" -->
+<!--          android:background="@android:color/black" -->
+<!--         > -->
+<!--     </TextView> -->
+      
+    <TextView
+        android:id="@+id/grid_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:textSize="15dp"
+        android:text="Product Name"
+        android:textStyle="bold"
+        android:background="@android:color/white"
+        android:gravity="center" >
+    </TextView>
+<!--   <TextView -->
+<!--          android:layout_width="1dp" -->
+<!--         android:layout_height="fill_parent" -->
+<!--          android:background="@android:color/w" > -->
+<!--     </TextView> -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        
+
+        <TextView
+            android:id="@+id/task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="Task: "
+            android:paddingBottom="2dp" />
+
+        <TextView
+            android:id="@+id/issue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:background="@android:color/white"
+             android:gravity="center"
+            android:text="Issue: "
+            android:paddingBottom="2dp" />
+
+      
+    </LinearLayout>
+    
+     </LinearLayout>
+    
+    
+<!--     <TextView -->
+<!--         android:id="@+id/textView1" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="1dp" -->
+<!--         android:background="@android:color/black" /> -->
+    
+
+</LinearLayout>

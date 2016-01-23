@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <HorizontalScrollView -->
+
+
+<!-- android:id="@+id/horizontalScrollView1" -->
+<!-- android:layout_width="match_parent" -->
+<!-- android:layout_height="match_parent" -->
+<!-- android:scrollbarFadeDuration="0" -->
+<!-- android:scrollbarAlwaysDrawHorizontalTrack="true" -->
+
+
+<!-- > -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="?android:attr/actionBarSize" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <!-- <TextView -->
+        <!-- android:id="@+id/ref" -->
+        <!-- android:layout_width="85dp" -->
+        <!-- android:layout_height="fill_parent" -->
+        <!-- android:layout_gravity="center" -->
+
+
+        <!-- android:gravity="center" -->
+        <!-- android:textAppearance="?android:attr/textAppearanceMedium" -->
+        <!-- android:text="Reference" -->
+        <!-- /> -->
+
+
+        <!-- <TextView -->
+        <!-- android:id="@+id/textView19" -->
+        <!-- android:layout_width="1dp" -->
+        <!-- android:layout_height="fill_parent" -->
+        <!-- android:background="#AAAAAA" /> -->
+
+        <TextView
+            android:id="@+id/pro"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.16"
+            android:gravity="center"
+            android:text="Product"
+               android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="1dp"
+               android:textStyle="bold"
+            android:layout_height="fill_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/qty"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.20"
+               android:textStyle="bold"
+            android:gravity="center"
+            android:text="Qty"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="1dp"
+               android:textStyle="bold"
+            android:layout_height="fill_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/uom"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+               android:textStyle="bold"
+            android:layout_weight="0.20"
+            android:gravity="center"
+            android:text="UOM"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView33"
+               android:textStyle="bold"
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/sno"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.20"
+               android:textStyle="bold"
+            android:gravity="center"
+            android:text="Serial No."
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="1dp"
+               android:textStyle="bold"
+            android:layout_height="fill_parent"
+            android:background="#AAAAAA" />
+        <!-- <TextView -->
+        <!-- android:id="@+id/tvevent" -->
+        <!-- android:layout_width="50dp" -->
+        <!-- android:layout_height="fill_parent" -->
+        <!-- android:textAppearance="?android:attr/textAppearanceMedium" -->
+        <!-- android:layout_weight="0.20" -->
+        <!-- android:layout_margin="2dp" -->
+        <!-- /> -->
+
+        <TextView
+            android:id="@+id/btnevent"
+            android:layout_width="52dp"
+               android:textStyle="bold"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Action"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <!-- <Button -->
+        <!-- android:id="@+id/btnevent" -->
+        <!-- android:layout_width="match_parent" -->
+        <!-- android:layout_height="45dp" -->
+        <!-- android:text="Action" -->
+        <!-- android:layout_margin="2dp" -->
+        <!-- android:layout_weight="0.20" -->
+        <!-- /> -->
+        <!-- android:background="@drawable/arrow_forward" -->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/black" />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:visibility="gone" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="440dp"
+        android:layout_height="2dp"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        android:id="@+id/progressBarforconsumeproductlist"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp" />
+
+</LinearLayout><!-- </HorizontalScrollView> -->
+
+
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- <TabHost xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- android:layout_width="fill_parent" -->
+<!-- android:layout_height="fill_parent" -->
+<!-- android:id="@android:id/tabhost"> -->
+
+
+<!-- <LinearLayout -->
+<!-- android:id="@+id/LinearLayout01" -->
+<!-- android:orientation="vertical" -->
+<!-- android:layout_height="fill_parent" -->
+<!-- android:layout_width="fill_parent"> -->
+
+
+<!-- <TabWidget -->
+<!-- android:id="@android:id/tabs" -->
+<!-- android:layout_height="wrap_content" -->
+<!-- android:layout_width="fill_parent"> -->
+<!-- </TabWidget> -->
+
+
+<!-- <FrameLayout -->
+<!-- android:id="@android:id/tabcontent" -->
+<!-- android:layout_height="fill_parent" -->
+<!-- android:layout_width="fill_parent"> -->
+<!-- </FrameLayout> -->
+
+
+<!-- </LinearLayout> -->
+
+
+<!-- </TabHost> -->
+
